@@ -1,0 +1,14 @@
+build
+dist
+
+.tox
+.cache
+.vscode
+
+*.egg-info
+*.log
+*.pyd
+*.pyc
+*.bat
+*.whl
+*.so

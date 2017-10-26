@@ -355,6 +355,16 @@ class Quat:
                 Quat: slerp
         '''
 
+    def lerp(self, rhs, coef) -> 'Quat':
+        '''
+            Args:
+                rhs (Quat): rhs
+                coef (float): coefficient
+
+            Returns:
+                Quat: slerp
+        '''
+
 def mat4_perspective(fovy, ratio, znear, zfar) -> Mat4:
     '''
         Args:

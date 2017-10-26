@@ -5,6 +5,27 @@ miniglm
 
 .. currentmodule:: miniglm
 
+Install
+-------
+
+.. literalinclude:: install_example.sh
+
+Links
+-----
+
+- `Source code on github <https://github.com/cprogrammer1994/miniglm>`_
+- `Issue tracker <https://github.com/cprogrammer1994/miniglm/issues>`_
+- `Documentation <https://miniglm.readthedocs.io>`_
+
+Alternatives
+------------
+
+`Numpy <http://www.numpy.org/>`_ and `Pyrr <https://github.com/adamlwgriffiths/Pyrr>`_ are great alternatives.
+This package was built to provide similar features.
+
+Content
+-------
+
 - :py:func:`mat4_perspective`
 - :py:func:`mat4_ortho`
 - :py:func:`mat4_look_at`
@@ -16,7 +37,8 @@ miniglm
 - :py:class:`Mat4`
 - :py:class:`Quat`
 
------
+Documentation
+-------------
 
 .. autofunction:: mat4_perspective(fovy, ratio, znear, zfar) -> Mat4
 .. autofunction:: mat4_ortho(left, right, bottom, top, znear, zfar) -> Mat4

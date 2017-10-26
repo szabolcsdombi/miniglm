@@ -171,7 +171,7 @@ texinfo_documents = [
 
 
 import os
-os.environ['SPHINX'] = 'yes'
+os.environ['READTHEDOCS'] = 'True'
 
 # autoclass_content = 'both'
 autodoc_member_order = 'bysource'

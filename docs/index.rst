@@ -154,6 +154,7 @@ miniglm
 	- :py:meth:`Quat.dot`
 	- :py:meth:`Quat.cross`
 	- :py:meth:`Quat.slerp`
+	- :py:meth:`Quat.lerp`
 
 	.. literalinclude:: quat_example.py
 
@@ -166,6 +167,7 @@ miniglm
 	.. automethod:: dot(rhs) -> float
 	.. automethod:: cross(rhs) -> Quat
 	.. automethod:: slerp(rhs, coef) -> Quat
+	.. automethod:: lerp(rhs, coef) -> Quat
 
 
 .. toctree::

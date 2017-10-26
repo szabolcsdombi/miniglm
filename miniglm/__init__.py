@@ -24,3 +24,5 @@ __all__ = [
     'Vec2', 'Vec3', 'Vec4', 'Mat2', 'Mat3', 'Mat4', 'Quat',
     'mat4_perspective', 'mat4_ortho', 'mat4_look_at',
 ]
+
+__version__ = '0.2.0'

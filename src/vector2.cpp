@@ -217,8 +217,8 @@ PyNumberMethods GLMVec2_tp_as_number = {
 	0, // binaryfunc nb_inplace_floor_divide;
 	(binaryfunc)GLMVec2_nb_inplace_true_divide, // binaryfunc nb_inplace_true_divide;
 	0, // unaryfunc nb_index;
-	0, // binaryfunc nb_matrix_multiply;
-	0, // binaryfunc nb_inplace_matrix_multiply;
+	// binaryfunc nb_matrix_multiply;
+	// binaryfunc nb_inplace_matrix_multiply;
 };
 
 Py_ssize_t GLMVec2_sq_length(GLMVec2 * self) {

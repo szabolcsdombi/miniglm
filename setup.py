@@ -18,7 +18,7 @@ glm = Extension(
 
 setup(
     name='miniglm',
-    version='0.2.1',
+    version='0.2.2',
     packages=['miniglm'],
     ext_modules=[glm],
 )

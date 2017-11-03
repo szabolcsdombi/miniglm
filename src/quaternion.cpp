@@ -337,6 +337,17 @@ PyObject * GLMQuat_tp_get_normal(GLMQuat * self, void * closure) {
 	return (PyObject *)res;
 }
 
+PyObject * GLMQuat_tp_get_axis(GLMQuat * self, void * closure) {
+	GLMVec3 * res = (GLMVec3 *)GLMVec3_tp_new(&GLMVec3_Type, 0, 0);
+	float s = (float)sqrt(1.0 - self->val.w * self->val.w);
+	res->val = glm::vec3(self->val.x / s, self->val.y / s, self->val.z / s);
+	return (PyObject *)res;
+}
+
+PyObject * GLMQuat_tp_get_angle(GLMQuat * self, void * closure) {
+	return PyFloat_FromDouble(2.0 * acos(self->val.w));
+}
+
 PyObject * GLMQuat_tp_get_tup(GLMQuat * self, void * closure) {
 	return GLMQuat_Tuple(self);
 }
@@ -346,6 +357,8 @@ PyGetSetDef GLMQuat_tp_getseters[] = {
 	{(char *)"normal", (getter)GLMQuat_tp_get_normal, 0, 0, 0},
 	{(char *)"conj", (getter)GLMQuat_tp_get_conj, 0, 0, 0},
 	{(char *)"inv", (getter)GLMQuat_tp_get_inv, 0, 0, 0},
+	{(char *)"axis", (getter)GLMQuat_tp_get_axis, 0, 0, 0},
+	{(char *)"angle", (getter)GLMQuat_tp_get_angle, 0, 0, 0},
 	{(char *)"tup", (getter)GLMQuat_tp_get_tup, 0, 0, 0},
 	{0},
 };

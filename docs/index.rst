@@ -184,6 +184,8 @@ Documentation
 	.. autoattribute:: Quat.normal
 	.. autoattribute:: Quat.conj
 	.. autoattribute:: Quat.inv
+	.. autoattribute:: Quat.axis
+	.. autoattribute:: Quat.angle
 	.. autoattribute:: Quat.tup
 
 	.. automethod:: dot(rhs) -> float

@@ -15,14 +15,12 @@ addons:
       - gcc-4.9
       - g++-4.9
 
-env:
-  - CC=gcc-4.9
-  - CXX=g++-4.9
-
 python:
   - "3.6"
 
 install:
+  - export CC=gcc-4.9
+  - export CXX=g++-4.9
   - python setup.py build_ext --force --inplace
 
 script:

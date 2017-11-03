@@ -22,6 +22,7 @@ install:
   - export CC=gcc-4.9
   - export CXX=g++-4.9
   - python setup.py build_ext --force --inplace
+  - python -m pip install -e .
 
 script:
   - pytest

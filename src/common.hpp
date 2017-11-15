@@ -40,6 +40,12 @@ struct GLMQuat {
 	glm::quat val;
 };
 
+struct GLMVec2Array {
+	PyObject_HEAD
+	glm::vec2 * val;
+	int size;
+};
+
 extern PyTypeObject GLMVec2_Type;
 extern PyTypeObject GLMVec3_Type;
 extern PyTypeObject GLMVec4_Type;
@@ -49,6 +55,8 @@ extern PyTypeObject GLMMat3_Type;
 extern PyTypeObject GLMMat4_Type;
 
 extern PyTypeObject GLMQuat_Type;
+
+extern PyTypeObject GLMVec2Array_Type;
 
 PyObject * GLMVec2_tp_new(PyTypeObject * type, PyObject * args, PyObject * kwargs);
 PyObject * GLMVec3_tp_new(PyTypeObject * type, PyObject * args, PyObject * kwargs);
@@ -60,6 +68,8 @@ PyObject * GLMMat4_tp_new(PyTypeObject * type, PyObject * args, PyObject * kwarg
 
 PyObject * GLMQuat_tp_new(PyTypeObject * type, PyObject * args, PyObject * kwargs);
 
+PyObject * GLMVec2Array_tp_new(PyTypeObject * type, PyObject * args, PyObject * kwargs);
+
 PyObject * GLMVec2_Tuple(GLMVec2 * self);
 PyObject * GLMVec3_Tuple(GLMVec3 * self);
 PyObject * GLMVec4_Tuple(GLMVec4 * self);
@@ -69,6 +79,8 @@ PyObject * GLMMat3_Tuple(GLMMat3 * self);
 PyObject * GLMMat4_Tuple(GLMMat4 * self);
 
 PyObject * GLMQuat_Tuple(GLMQuat * self);
+
+PyObject * GLMVec2Array_Tuple(GLMVec2Array * self);
 
 glm::vec2 vec2_from_iterable(PyObject * iterable);
 glm::vec3 vec3_from_iterable(PyObject * iterable);

@@ -105,7 +105,7 @@ PyObject * GLMVec2_nb_true_divide(PyObject * lhs, PyObject * rhs) {
 		float rhs_float = (float)PyFloat_AsDouble(rhs);
 		if (!PyErr_Occurred()) {
 			GLMVec2 * res = (GLMVec2 *)GLMVec2_tp_new(&GLMVec2_Type, 0, 0);
-			res->val = ((GLMVec2 *)lhs)->val * rhs_float;
+			res->val = ((GLMVec2 *)lhs)->val / rhs_float;
 			return (PyObject *)res;
 		}
 	}

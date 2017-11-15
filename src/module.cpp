@@ -100,6 +100,17 @@ PyObject * Initialize(PyObject * module) {
 		PyModule_AddObject(module, "Quat", (PyObject *)&GLMQuat_Type);
 	}
 
+	{
+		if (PyType_Ready(&GLMVec2Array_Type) < 0) {
+			PyErr_Format(PyExc_ImportError, "Cannot register Vec2Array in %s (%s:%d)", __FUNCTION__, __FILE__, __LINE__);
+			return 0;
+		}
+
+		Py_INCREF(&GLMVec2Array_Type);
+
+		PyModule_AddObject(module, "Vec2Array", (PyObject *)&GLMVec2Array_Type);
+	}
+
 	return module;
 }
 

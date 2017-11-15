@@ -10,6 +10,7 @@ glm = Extension(
         'src/matrix3.cpp',
         'src/matrix4.cpp',
         'src/quaternion.cpp',
+        'src/vector2_array.cpp',
         'src/module.cpp',
         'src/others.cpp',
         'src/tools.cpp',

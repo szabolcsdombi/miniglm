@@ -25,4 +25,4 @@ __all__ = [
     'mat4_perspective', 'mat4_ortho', 'mat4_look_at',
 ]
 
-__version__ = '0.2.3'
+__version__ = '0.2.4'

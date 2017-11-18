@@ -1,7 +1,7 @@
 import time
 from miniglm import Vec3
-from pyrr import Vector3
-import numpy as np
+# from pyrr import Vector3
+# import numpy as np
 
 
 class PyVec3:
@@ -24,7 +24,7 @@ def measure(func, *args):
     start = time.clock()
     func(*args)
     elapsed = time.clock() - start
-    print(elapsed)
+    print(elapsed, 'seconds')
 
 
 def add_mul(typ, a, b, c, n):
@@ -34,7 +34,26 @@ def add_mul(typ, a, b, c, n):
         z = x + y + x * y * c
 
 
-measure(add_mul, Vec3, (0.0, 0.0, 0.0), (0.0, 0.0, 0.0), 0.0, 100000)
-measure(add_mul, PyVec3, (0.0, 0.0, 0.0), (0.0, 0.0, 0.0), 0.0, 100000)
-measure(add_mul, Vector3, (0.0, 0.0, 0.0), (0.0, 0.0, 0.0), 0.0, 100000)
-measure(add_mul, np.array, (0.0, 0.0, 0.0), (0.0, 0.0, 0.0), 0.0, 100000)
+def add_add_add(typ, a, n):
+    for i in range(n):
+        x = typ(a)
+        x = x + x + x + x + x + x + x + x + x + x + x + x + x + x + x + x + x + x + x + x + x
+        x = x + x + x + x + x + x + x + x + x + x + x + x + x + x + x + x + x + x + x + x + x
+        x = x + x + x + x + x + x + x + x + x + x + x + x + x + x + x + x + x + x + x + x + x
+        x = x + x + x + x + x + x + x + x + x + x + x + x + x + x + x + x + x + x + x + x + x
+        x = x + x + x + x + x + x + x + x + x + x + x + x + x + x + x + x + x + x + x + x + x
+
+
+measure(add_mul, Vec3, (0.0, 0.0, 0.0), (0.0, 0.0, 0.0), 0.0, 10000000)
+measure(add_mul, PyVec3, (0.0, 0.0, 0.0), (0.0, 0.0, 0.0), 0.0, 10000000)
+# measure(add_mul, Vector3, (0.0, 0.0, 0.0), (0.0, 0.0, 0.0), 0.0, 10000000)
+# measure(add_mul, np.array, (0.0, 0.0, 0.0), (0.0, 0.0, 0.0), 0.0, 10000000)
+
+print('-' * 40)
+
+measure(add_add_add, Vec3, (0.0, 0.0, 0.0), 1000000)
+measure(add_add_add, PyVec3, (0.0, 0.0, 0.0), 1000000)
+# measure(add_add_add, Vector3, (0.0, 0.0, 0.0), 1000000)
+# measure(add_add_add, np.array, (0.0, 0.0, 0.0), 1000000)
+
+print('-' * 40)

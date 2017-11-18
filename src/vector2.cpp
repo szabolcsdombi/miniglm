@@ -288,16 +288,6 @@ PyObject * GLMVec2_tp_meth_dot(GLMVec2 * lhs, PyObject * args) {
 	return 0;
 }
 
-PyObject * GLMVec2_tp_meth_cross(GLMVec2 * lhs, PyObject * args) {
-	// PyObject * rhs = PyTuple_GetItem(args, 0);
-	// if (Py_TYPE(rhs) == &GLMVec2_Type) {
-	// 	GLMVec2 * res = (GLMVec2 *)GLMVec2_tp_new(&GLMVec2_Type, 0, 0);
-	// 	res->val = glm::cross(lhs->val, ((GLMVec2 *)rhs)->val);
-	// 	return (PyObject *)res;
-	// }
-	// return 0;
-}
-
 PyObject * GLMVec2_tp_meth_reflect(GLMVec2 * self, PyObject * args) {
 	PyObject * norm = PyTuple_GetItem(args, 0);
 	if (Py_TYPE(norm) == &GLMVec2_Type) {
@@ -324,7 +314,6 @@ PyObject * GLMVec2_tp_meth_refract(GLMVec2 * self, PyObject * args) {
 
 PyMethodDef GLMVec2_tp_methods[] = {
 	{"dot", (PyCFunction)GLMVec2_tp_meth_dot, METH_VARARGS, 0},
-	// {"cross", (PyCFunction)GLMVec2_tp_meth_cross, METH_VARARGS, 0},
 	{"reflect", (PyCFunction)GLMVec2_tp_meth_reflect, METH_VARARGS, 0},
 	{"refract", (PyCFunction)GLMVec2_tp_meth_refract, METH_VARARGS, 0},
 	{0},

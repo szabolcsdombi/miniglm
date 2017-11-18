@@ -244,7 +244,7 @@ PyObject * GLMMat4_nb_inplace_multiply(PyObject * lhs, PyObject * rhs) {
 PyObject * GLMMat4_nb_inplace_true_divide(PyObject * lhs, PyObject * rhs) {
 	float rhs_float = (float)PyFloat_AsDouble(rhs);
 	if (!PyErr_Occurred()) {
-		((GLMMat4 *)lhs)->val *= rhs_float;
+		((GLMMat4 *)lhs)->val /= rhs_float;
 		Py_INCREF(lhs);
 		return lhs;
 	}

@@ -1,10 +1,10 @@
 import unittest
 
 from miniglm import Vec2, Vec3, Vec4, Mat2, Mat3, Mat4, Quat
-from common import MyTestTest
+from common import MyTestCase
 
 
-class TestCase(MyTestTest):
+class TestCase(MyTestCase):
     def test_vec2_bytes_size(self):
         a = Vec2((0.0, 0.0))
         self.assertEqual(len(bytes(a)), 2 * 4)

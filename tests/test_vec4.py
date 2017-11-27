@@ -1,11 +1,10 @@
 import unittest
-import math
 
 from miniglm import Vec4
-from common import MyTestTest
+from common import MyTestCase
 
 
-class TestCase(MyTestTest):
+class TestCase(MyTestCase):
     def test_1(self):
         a = Vec4((1.0, 2.0, 3.0, -4.0))
         b = Vec4((4.0, -4.0, 5.0, -4.0))

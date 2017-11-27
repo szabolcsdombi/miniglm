@@ -1,7 +1,7 @@
 import unittest
 
 
-class MyTestTest(unittest.TestCase):
+class MyTestCase(unittest.TestCase):
     def assertAlmostEqual1(self, first, second, places=None, msg=None, delta=None):
         if places is None:
             places = 4

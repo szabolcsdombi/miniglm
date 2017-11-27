@@ -1,11 +1,10 @@
 import unittest
-import math
 
 from miniglm import Vec3
-from common import MyTestTest
+from common import MyTestCase
 
 
-class TestCase(MyTestTest):
+class TestCase(MyTestCase):
     def test_1(self):
         a = Vec3((1.0, 2.0, 3.0))
         b = Vec3((4.0, -4.0, 5.0))

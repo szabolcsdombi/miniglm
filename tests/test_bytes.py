@@ -1,5 +1,4 @@
 import unittest
-import math
 
 from miniglm import Vec2, Vec3, Vec4, Mat2, Mat3, Mat4, Quat
 from common import MyTestTest

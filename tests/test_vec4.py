@@ -1,5 +1,4 @@
 import unittest
-import math
 
 from miniglm import Vec4
 from common import MyTestTest

@@ -366,14 +366,14 @@ PyBufferProcs GLMMat4_tp_as_buffer = {
 PyObject * GLMMat4_tp_meth_row(GLMMat4 * self, PyObject * args) {
 	int idx = PyLong_AsLong(PyTuple_GetItem(args, 0));
 	GLMVec4 * res = (GLMVec4 *)GLMVec4_tp_new(&GLMVec4_Type, 0, 0);
-	res->val = glm::vec4(self->val[idx][0], self->val[idx][1], self->val[idx][2], self->val[idx][3]);
+	res->val = glm::vec4(self->val[0][idx], self->val[1][idx], self->val[2][idx], self->val[3][idx]);
 	return (PyObject *)res;
 }
 
 PyObject * GLMMat4_tp_meth_col(GLMMat4 * self, PyObject * args) {
 	int idx = PyLong_AsLong(PyTuple_GetItem(args, 0));
 	GLMVec4 * res = (GLMVec4 *)GLMVec4_tp_new(&GLMVec4_Type, 0, 0);
-	res->val = glm::vec4(self->val[0][idx], self->val[1][idx], self->val[2][idx], self->val[3][idx]);
+	res->val = glm::vec4(self->val[idx][0], self->val[idx][1], self->val[idx][2], self->val[idx][3]);
 	return (PyObject *)res;
 }
 

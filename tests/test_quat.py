@@ -1,3 +1,4 @@
+import math
 import unittest
 
 from miniglm import Quat
@@ -12,25 +13,44 @@ class TestCase(MyTestCase):
     def test_2(self):
         a = Quat((1.0, 1.0, 1.0, 1.0))
         b = Quat((0.5, 0.2, 0.1, 1.0))
-        self.assertAlmostEqual2(a * b, (1.399999976158142, 1.600000023841858, 0.8000000715255737, 0.20000001788139343))
+        self.assertAlmostEqual2(a * b, (1.4, 1.6, 0.8, 0.2))
 
     def test_3(self):
         a = Quat((1.0, 1.0, 1.0, 1.0))
         b = Quat((.5, .2, .1, 1))
         self.assertAlmostEqual1(a.length, 2.0)
-        self.assertAlmostEqual2(a.normal, (0.5,  0.5,  0.5,  0.5))
-        self.assertAlmostEqual2(a.conj, (-1., -1., -1.,  1.))
-        self.assertAlmostEqual2(a.normal.inv, (-0.5, -0.5, -0.5,  0.5))
-        self.assertAlmostEqual2(a.tup, [1.0, 1.0, 1.0, 1.0])
-        self.assertAlmostEqual1(a.dot(b), 1.7999999999999998)
-        self.assertAlmostEqual2(a.cross(b), ( 1.4,  1.6,  0.8,  0.2))
+        self.assertAlmostEqual2(a.normal, (0.5, 0.5, 0.5, 0.5))
+        self.assertAlmostEqual2(a.conj, (-1.0, -1.0, -1.0, 1.0))
+        self.assertAlmostEqual2(a.normal.inv, (-0.5, -0.5, -0.5, 0.5))
+        self.assertAlmostEqual2(a.tup, (1.0, 1.0, 1.0, 1.0))
+        self.assertAlmostEqual1(a.dot(b), 1.8)
+        self.assertAlmostEqual2(a.cross(b), (1.4, 1.6, 0.8, 0.2))
 
-    def test_4(self):
-        self.skipTest('TODO: Fix lerp and slerp')
-        a = Quat((1.0, 1.0, 1.0, 1.0))
-        b = Quat((.5, .2, .1, 1))
-        self.assertAlmostEqual2(Quat.slerp(a, b, 2), (0.43852901,  0.1754116 ,  0.0877058 ,  0.87705802))
-        self.assertAlmostEqual2(Quat.lerp(a, b, 2), (0.43852901,  0.1754116 ,  0.0877058 ,  0.87705802))
+    def test_quaternion_slerp(self):
+        identity = Quat((0.0, 0.0, 0.0, 1.0))
+        y90rot = Quat((0.0, 0.7071067811865476, 0.0, 0.7071067811865476))
+        y180rot = Quat((0.0, 1.0, 0.0, 0.0))
+
+        result = identity.slerp(y90rot, 0.0)
+        self.assertAlmostEqual2(result, identity)
+
+        result = identity.slerp(y90rot, 1.0)
+        self.assertAlmostEqual2(result, y90rot)
+
+        y45rot1 = identity.slerp(y90rot, 0.5)
+        y45rot2 = y90rot.slerp(identity, 0.5)
+        self.assertAlmostEqual2(y45rot1, y45rot2)
+
+        y45rot3 = identity.slerp(y90rot, 0.5)
+        y45angle3 = y45rot3.angle
+        self.assertAlmostEqual1(y45angle3, math.pi / 4)
+
+        y90rot3 = y90rot.slerp(y90rot, 0.5)
+        self.assertAlmostEqual2(y90rot3, y90rot)
+
+        xz90rot = identity.slerp(-y90rot, 0.5)
+        xz90rot_angle = xz90rot.angle
+        self.assertAlmostEqual1(xz90rot_angle, math.pi / 4)
 
 
 if __name__ == "__main__":

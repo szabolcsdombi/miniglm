@@ -21,7 +21,6 @@ class TestCase(MyTestCase):
         self.assertAlmostEqual2(-a, (-4.0, -4.0, -2.0, -2.0))
         self.assertAlmostEqual2(+a, (+4.0, +4.0, +2.0, +2.0))
 
-
     def test_3(self):
         a = Mat2((1.0, 2.0, 3.0, 4.0))
         self.assertAlmostEqual2(a.trans, (1.0, 3.0, 2.0, 4.0))
@@ -30,6 +29,7 @@ class TestCase(MyTestCase):
         self.assertAlmostEqual2(a.tup, [1.0, 2.0, 3.0, 4.0])
         self.assertAlmostEqual2(a.row(0), (1.0, 3.0))
         self.assertAlmostEqual2(a.col(0), (1.0, 2.0))
+
 
 if __name__ == "__main__":
     unittest.main()

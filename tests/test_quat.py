@@ -4,6 +4,7 @@ import unittest
 from miniglm import Quat
 from common import MyTestCase
 
+
 class TestCase(MyTestCase):
     def test_1(self):
         a = Quat((1.0, 1.0, 1.0, 1.0))

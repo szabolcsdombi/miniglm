@@ -12,7 +12,7 @@ PyObject * GLMVec4Array_tp_new(PyTypeObject * type, PyObject * args, PyObject * 
     return (PyObject *)self;
 }
 
-PyObject * GLMVec4Array_tp_dealloc(GLMVec4Array * self){
+void GLMVec4Array_tp_dealloc(GLMVec4Array * self){
     Py_TYPE(self)->tp_free((PyObject *)self);
 }
 

@@ -78,7 +78,7 @@ struct GLMMat3Array {
 
 struct GLMMat4Array {
 	PyObject_HEAD
-	glm::mat2 * val;
+	glm::mat4 * val;
 	int size;
 };
 
@@ -138,12 +138,12 @@ PyObject * GLMMat4_Tuple(GLMMat4 * self);
 PyObject * GLMQuat_Tuple(GLMQuat * self);
 
 PyObject * GLMVec2Array_Tuple(GLMVec2Array * self);
-PyObject * GLMVec3Array_Tuple(GLMVec4Array * self);
+PyObject * GLMVec3Array_Tuple(GLMVec3Array * self);
 PyObject * GLMVec4Array_Tuple(GLMVec4Array * self);
 
 PyObject * GLMMat2Array_Tuple(GLMMat2Array * self);
-PyObject * GLMMat2Array_Tuple(GLMMat3Array * self);
-PyObject * GLMMat2Array_Tuple(GLMMat4Array * self);
+PyObject * GLMMat3Array_Tuple(GLMMat3Array * self);
+PyObject * GLMMat4Array_Tuple(GLMMat4Array * self);
 
 PyObject * GLMQuatArray_Tuple(GLMQuatArray * self);
 

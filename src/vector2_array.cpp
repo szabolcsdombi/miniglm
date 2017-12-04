@@ -376,7 +376,7 @@ PyNumberMethods GLMVec2Array_tp_as_number = {
 };
 
 Py_ssize_t GLMVec2Array_sq_length(GLMVec2Array * self) {
-	return N;
+	return N * self->size;
 }
 
 PyObject * GLMVec2Array_sq_item(GLMVec2Array * self, Py_ssize_t key) {

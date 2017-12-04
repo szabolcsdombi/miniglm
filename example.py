@@ -50,7 +50,7 @@ class Example:
         self.ctx.clear(1.0, 1.0, 1.0)
         self.ctx.enable(ModernGL.DEPTH_TEST)
 
-        proj = glm.mat4_perspective(45.0, width / height, 0.1, 1000.0)
+        proj = glm.mat4_perspective(glm.radians(60.0), width / height, 0.1, 1000.0)
         lookat = glm.mat4_look_at(
             (40.0, 30.0, 30.0),
             (0.0, 0.0, 0.0),

@@ -25,6 +25,15 @@ __all__ = [
     'Vec2', 'Vec3', 'Vec4', 'Mat2', 'Mat3', 'Mat4', 'Quat',
     'Vec2Array',
     'mat4_perspective', 'mat4_ortho', 'mat4_look_at',
+    'radians', 'degrees',
 ]
 
 __version__ = '0.2.4'
+
+
+def radians(deg):
+    return deg / 57.2957795131
+
+
+def degrees(rad):
+    return rad * 57.2957795131

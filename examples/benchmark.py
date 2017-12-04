@@ -20,7 +20,7 @@ class PyVec3:
 
 
 def measure(func, *args):
-    print('Running %s %r - '  % (func.__name__, args), end='')
+    print('Running %s %r - ' % (func.__name__, args), end='')
     start = time.clock()
     func(*args)
     elapsed = time.clock() - start

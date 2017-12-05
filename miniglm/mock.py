@@ -187,7 +187,7 @@ class Mat2:
             Mat2: tuple
         '''
 
-    def row(self, i) -> Vec2:
+    def row(self, i) -> 'Vec2':
         '''
             Args:
                 i (int): i
@@ -196,7 +196,7 @@ class Mat2:
                 Vec2: row
         '''
 
-    def col(self, i) -> Vec2:
+    def col(self, i) -> 'Vec2':
         '''
             Args:
                 i (int): i
@@ -231,7 +231,7 @@ class Mat3:
             Mat3: tuple
         '''
 
-    def row(self, i) -> Vec3:
+    def row(self, i) -> 'Vec3':
         '''
             Args:
                 i (int): i
@@ -240,7 +240,7 @@ class Mat3:
                 Vec3: row
         '''
 
-    def col(self, i) -> Vec3:
+    def col(self, i) -> 'Vec3':
         '''
             Args:
                 i (int): i
@@ -275,7 +275,7 @@ class Mat4:
             Mat4: tuple
         '''
 
-    def row(self, i) -> Vec4:
+    def row(self, i) -> 'Vec4':
         '''
             Args:
                 i (int): i
@@ -284,7 +284,7 @@ class Mat4:
                 Vec4: row
         '''
 
-    def col(self, i) -> Vec4:
+    def col(self, i) -> 'Vec4':
         '''
             Args:
                 i (int): i
@@ -319,6 +319,18 @@ class Quat:
     def inv(self) -> 'Quat':
         '''
             Quat: inv
+        '''
+
+    @property
+    def axis(self) -> 'Vec3':
+        '''
+            Vec3: axis
+        '''
+
+    @property
+    def angle(self) -> float:
+        '''
+            float: angle
         '''
 
     @property
@@ -365,7 +377,7 @@ class Quat:
                 Quat: slerp
         '''
 
-def mat4_perspective(fovy, ratio, znear, zfar) -> Mat4:
+def mat4_perspective(fovy, ratio, znear, zfar) -> 'Mat4':
     '''
         Args:
             fovy (float): fovy
@@ -377,7 +389,7 @@ def mat4_perspective(fovy, ratio, znear, zfar) -> Mat4:
             Mat4: perspective
     '''
 
-def mat4_ortho(left, right, bottom, top, znear, zfar) -> Mat4:
+def mat4_ortho(left, right, bottom, top, znear, zfar) -> 'Mat4':
     '''
         Args:
             left (float): left
@@ -391,7 +403,7 @@ def mat4_ortho(left, right, bottom, top, znear, zfar) -> Mat4:
             Mat4: ortho
     '''
 
-def mat4_look_at(eye, center, up) -> Mat4:
+def mat4_look_at(eye, center, up) -> 'Mat4':
     '''
         Args:
             eye (Vec3): eye

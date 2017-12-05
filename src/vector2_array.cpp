@@ -430,7 +430,7 @@ int GLMVec2Array_bf_getbuffer(GLMVec2Array * self, Py_buffer * view, int flags) 
 }
 
 PyBufferProcs GLMVec2Array_tp_as_buffer = {
-    (getbufferproc)GLMVec2Array_bf_getbuffer, // getbufferproc bf_getbuffer;
+	(getbufferproc)GLMVec2Array_bf_getbuffer, // getbufferproc bf_getbuffer;
 	0, // releasebufferproc bf_releasebuffer;
 };
 

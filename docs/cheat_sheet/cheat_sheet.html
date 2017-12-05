@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>miniglm | Cheat Sheet</title>
+	<style>
+		html {
+			line-height: 1.15;
+			-ms-text-size-adjust: 100%;
+			-webkit-text-size-adjust: 100%;
+		}
+
+		html, body {
+			margin: 0;
+			padding: 0;
+		}
+
+		.Member {
+			display: inline;
+			font-weight: bold;
+		}
+
+		.Parentheses {
+			display: inline;
+		}
+
+		.ParamType {
+			display: inline;
+			font-weight: bold;
+			/* color: red; */
+		}
+
+		.RetType {
+			display: inline;
+			font-weight: bold;
+			/* color: blue; */
+		}
+
+		.Arrow {
+			display: inline;
+		}
+
+		.Page {
+			display: grid;
+			grid-template-columns: repeat(3, calc(100% / 3));
+		}
+
+		.Class {
+			margin: 10px;
+		}
+
+		.Others {
+			grid-column: 2 / 4;
+		}
+
+		.ClassName {
+			font-size: 200%;
+			border-bottom: 1px solid black;
+			padding-bottom: 5px;
+		}
+
+		.ClassMember {
+			font-family: Consolas;
+			padding: 2px 12px;
+		}
+
+		.ClassMember:nth-child(2n+1) {
+			background-color: #eeeeee;
+		}
+
+		@media print {
+			body {
+				font-size: 70%;
+			}
+		}
+	</style>
+</head>
+<body>
+	<div class="Page">
+		<div class="Class">
+			<div class="ClassName">Vec2</div>
+			<div class="ClassMembers">
+				<div class="ClassMember"><div class="Member">dot</div><div class="Parentheses">(</div>rhs:<div class="ParamType">Vec2</div><div class="Parentheses">)</div>&nbsp;<div class="Arrow">-&gt;</div> <div class="RetType">float</div></div>
+				<div class="ClassMember"><div class="Member">reflect</div><div class="Parentheses">(</div>norm:<div class="ParamType">Vec2</div><div class="Parentheses">)</div>&nbsp;<div class="Arrow">-&gt;</div> <div class="RetType">Vec2</div></div>
+				<div class="ClassMember"><div class="Member">refract</div><div class="Parentheses">(</div>norm:<div class="ParamType">Vec2</div>,&nbsp;eta:<div class="ParamType">float</div><div class="Parentheses">)</div>&nbsp;<div class="Arrow">-&gt;</div> <div class="RetType">Vec2</div></div>
+				<div class="ClassMember"><div class="Member">length</div>&nbsp;<div class="Arrow">-&gt;</div> <div class="RetType">float</div></div>
+				<div class="ClassMember"><div class="Member">normal</div>&nbsp;<div class="Arrow">-&gt;</div> <div class="RetType">Vec2</div></div>
+				<div class="ClassMember"><div class="Member">tup</div>&nbsp;<div class="Arrow">-&gt;</div> <div class="RetType">tuple</div></div>
+			</div>
+		</div>
+		<div class="Class">
+			<div class="ClassName">Vec3</div>
+			<div class="ClassMembers">
+				<div class="ClassMember"><div class="Member">cross</div><div class="Parentheses">(</div>rhs:<div class="ParamType">Vec3</div><div class="Parentheses">)</div>&nbsp;<div class="Arrow">-&gt;</div> <div class="RetType">Vec3</div></div>
+				<div class="ClassMember"><div class="Member">dot</div><div class="Parentheses">(</div>rhs:<div class="ParamType">Vec3</div><div class="Parentheses">)</div>&nbsp;<div class="Arrow">-&gt;</div> <div class="RetType">float</div></div>
+				<div class="ClassMember"><div class="Member">reflect</div><div class="Parentheses">(</div>norm:<div class="ParamType">Vec3</div><div class="Parentheses">)</div>&nbsp;<div class="Arrow">-&gt;</div> <div class="RetType">Vec3</div></div>
+				<div class="ClassMember"><div class="Member">refract</div><div class="Parentheses">(</div>norm:<div class="ParamType">Vec3</div>,&nbsp;eta:<div class="ParamType">float</div><div class="Parentheses">)</div>&nbsp;<div class="Arrow">-&gt;</div> <div class="RetType">Vec3</div></div>
+				<div class="ClassMember"><div class="Member">length</div>&nbsp;<div class="Arrow">-&gt;</div> <div class="RetType">float</div></div>
+				<div class="ClassMember"><div class="Member">normal</div>&nbsp;<div class="Arrow">-&gt;</div> <div class="RetType">Vec3</div></div>
+				<div class="ClassMember"><div class="Member">tup</div>&nbsp;<div class="Arrow">-&gt;</div> <div class="RetType">tuple</div></div>
+			</div>
+		</div>
+		<div class="Class">
+			<div class="ClassName">Vec4</div>
+			<div class="ClassMembers">
+				<div class="ClassMember"><div class="Member">dot</div><div class="Parentheses">(</div>rhs:<div class="ParamType">Vec4</div><div class="Parentheses">)</div>&nbsp;<div class="Arrow">-&gt;</div> <div class="RetType">float</div></div>
+				<div class="ClassMember"><div class="Member">reflect</div><div class="Parentheses">(</div>norm:<div class="ParamType">Vec4</div><div class="Parentheses">)</div>&nbsp;<div class="Arrow">-&gt;</div> <div class="RetType">Vec4</div></div>
+				<div class="ClassMember"><div class="Member">refract</div><div class="Parentheses">(</div>norm:<div class="ParamType">Vec4</div>,&nbsp;eta:<div class="ParamType">float</div><div class="Parentheses">)</div>&nbsp;<div class="Arrow">-&gt;</div> <div class="RetType">Vec4</div></div>
+				<div class="ClassMember"><div class="Member">length</div>&nbsp;<div class="Arrow">-&gt;</div> <div class="RetType">float</div></div>
+				<div class="ClassMember"><div class="Member">normal</div>&nbsp;<div class="Arrow">-&gt;</div> <div class="RetType">Vec4</div></div>
+				<div class="ClassMember"><div class="Member">tup</div>&nbsp;<div class="Arrow">-&gt;</div> <div class="RetType">tuple</div></div>
+			</div>
+		</div>
+		<div class="Class">
+			<div class="ClassName">Mat2</div>
+			<div class="ClassMembers">
+				<div class="ClassMember"><div class="Member">col</div><div class="Parentheses">(</div>i:<div class="ParamType">int</div><div class="Parentheses">)</div>&nbsp;<div class="Arrow">-&gt;</div> <div class="RetType">Vec2</div></div>
+				<div class="ClassMember"><div class="Member">row</div><div class="Parentheses">(</div>i:<div class="ParamType">int</div><div class="Parentheses">)</div>&nbsp;<div class="Arrow">-&gt;</div> <div class="RetType">Vec2</div></div>
+				<div class="ClassMember"><div class="Member">det</div>&nbsp;<div class="Arrow">-&gt;</div> <div class="RetType">float</div></div>
+				<div class="ClassMember"><div class="Member">inv</div>&nbsp;<div class="Arrow">-&gt;</div> <div class="RetType">Mat2</div></div>
+				<div class="ClassMember"><div class="Member">trans</div>&nbsp;<div class="Arrow">-&gt;</div> <div class="RetType">Mat2</div></div>
+				<div class="ClassMember"><div class="Member">tup</div>&nbsp;<div class="Arrow">-&gt;</div> <div class="RetType">tuple</div></div>
+			</div>
+		</div>
+		<div class="Class">
+			<div class="ClassName">Mat3</div>
+			<div class="ClassMembers">
+				<div class="ClassMember"><div class="Member">col</div><div class="Parentheses">(</div>i:<div class="ParamType">int</div><div class="Parentheses">)</div>&nbsp;<div class="Arrow">-&gt;</div> <div class="RetType">Vec3</div></div>
+				<div class="ClassMember"><div class="Member">row</div><div class="Parentheses">(</div>i:<div class="ParamType">int</div><div class="Parentheses">)</div>&nbsp;<div class="Arrow">-&gt;</div> <div class="RetType">Vec3</div></div>
+				<div class="ClassMember"><div class="Member">det</div>&nbsp;<div class="Arrow">-&gt;</div> <div class="RetType">float</div></div>
+				<div class="ClassMember"><div class="Member">inv</div>&nbsp;<div class="Arrow">-&gt;</div> <div class="RetType">Mat3</div></div>
+				<div class="ClassMember"><div class="Member">trans</div>&nbsp;<div class="Arrow">-&gt;</div> <div class="RetType">Mat3</div></div>
+				<div class="ClassMember"><div class="Member">tup</div>&nbsp;<div class="Arrow">-&gt;</div> <div class="RetType">tuple</div></div>
+			</div>
+		</div>
+		<div class="Class">
+			<div class="ClassName">Mat4</div>
+			<div class="ClassMembers">
+				<div class="ClassMember"><div class="Member">col</div><div class="Parentheses">(</div>i:<div class="ParamType">int</div><div class="Parentheses">)</div>&nbsp;<div class="Arrow">-&gt;</div> <div class="RetType">Vec4</div></div>
+				<div class="ClassMember"><div class="Member">row</div><div class="Parentheses">(</div>i:<div class="ParamType">int</div><div class="Parentheses">)</div>&nbsp;<div class="Arrow">-&gt;</div> <div class="RetType">Vec4</div></div>
+				<div class="ClassMember"><div class="Member">det</div>&nbsp;<div class="Arrow">-&gt;</div> <div class="RetType">float</div></div>
+				<div class="ClassMember"><div class="Member">inv</div>&nbsp;<div class="Arrow">-&gt;</div> <div class="RetType">Mat4</div></div>
+				<div class="ClassMember"><div class="Member">trans</div>&nbsp;<div class="Arrow">-&gt;</div> <div class="RetType">Mat4</div></div>
+				<div class="ClassMember"><div class="Member">tup</div>&nbsp;<div class="Arrow">-&gt;</div> <div class="RetType">tuple</div></div>
+			</div>
+		</div>
+		<div class="Class">
+			<div class="ClassName">Quat</div>
+			<div class="ClassMembers">
+				<div class="ClassMember"><div class="Member">cross</div><div class="Parentheses">(</div>rhs:<div class="ParamType">Quat</div><div class="Parentheses">)</div>&nbsp;<div class="Arrow">-&gt;</div> <div class="RetType">Quat</div></div>
+				<div class="ClassMember"><div class="Member">dot</div><div class="Parentheses">(</div>rhs:<div class="ParamType">Quat</div><div class="Parentheses">)</div>&nbsp;<div class="Arrow">-&gt;</div> <div class="RetType">float</div></div>
+				<div class="ClassMember"><div class="Member">lerp</div><div class="Parentheses">(</div>rhs:<div class="ParamType">Quat</div>,&nbsp;coef:<div class="ParamType">float</div><div class="Parentheses">)</div>&nbsp;<div
+				class="Arrow">-&gt;</div> <div class="RetType">Quat</div></div>
+				<div class="ClassMember"><div class="Member">slerp</div><div class="Parentheses">(</div>rhs:<div class="ParamType">Quat</div>,&nbsp;coef:<div class="ParamType">float</div><div class="Parentheses">)</div>&nbsp;<div class="Arrow">-&gt;</div> <div class="RetType">Quat</div></div>
+				<div class="ClassMember"><div class="Member">angle</div>&nbsp;<div class="Arrow">-&gt;</div> <div class="RetType">float</div></div>
+				<div class="ClassMember"><div class="Member">axis</div>&nbsp;<div class="Arrow">-&gt;</div> <div class="RetType">Vec3</div></div>
+				<div class="ClassMember"><div class="Member">conj</div>&nbsp;<div class="Arrow">-&gt;</div> <div class="RetType">Quat</div></div>
+				<div class="ClassMember"><div class="Member">inv</div>&nbsp;<div class="Arrow">-&gt;</div> <div class="RetType">Quat</div></div>
+				<div class="ClassMember"><div class="Member">length</div>&nbsp;<div class="Arrow">-&gt;</div> <div class="RetType">float</div></div>
+				<div class="ClassMember"><div class="Member">normal</div>&nbsp;<div class="Arrow">-&gt;</div> <div class="RetType">Quat</div></div>
+				<div class="ClassMember"><div class="Member">tup</div>&nbsp;<div class="Arrow">-&gt;</div> <div class="RetType">tuple</div></div>
+			</div>
+		</div>
+		<div class="Class Others">
+			<div class="ClassName">Other methods</div>
+			<div class="ClassMembers">
+				<div class="ClassMember"><div class="Member">mat4_perspective</div><div class="Parentheses">(</div>fovy:<div class="ParamType">float</div>,&nbsp;ratio:<div class="ParamType">float</div>,&nbsp;znear:<div class="ParamType">float</div>,&nbsp;zfar:<div class="ParamType">float</div><div class="Parentheses">)</div>&nbsp;<div class="Arrow">-&gt;</div> <div class="RetType">Mat4</div></div>
+				<div class="ClassMember"><div class="Member">mat4_ortho</div><div class="Parentheses">(</div>left:<div class="ParamType">float</div>,&nbsp;right:<div class="ParamType">float</div>,&nbsp;bottom:<div class="ParamType">float</div>,&nbsp;top:<div class="ParamType">float</div>,&nbsp;znear:<div class="ParamType">float</div>,&nbsp;zfar:<div class="ParamType">float</div><div class="Parentheses">)</div>&nbsp;<div class="Arrow">-&gt;</div> <div class="RetType">Mat4</div></div>
+				<div class="ClassMember"><div class="Member">mat4_look_at</div><div class="Parentheses">(</div>eye:<div class="ParamType">Vec3</div>,&nbsp;center:<div class="ParamType">Vec3</div>,&nbsp;up:<div class="ParamType">Vec3</div><div class="Parentheses">)</div>&nbsp;<div class="Arrow">-&gt;</div> <div class="RetType">Mat4</div></div>
+				<div class="ClassMember"><div class="Member">radians</div><div class="Parentheses">(</div>deg:<div class="ParamType">float</div><div class="Parentheses">)</div>&nbsp;<div class="Arrow">-&gt;</div> <div class="RetType">float</div></div>
+				<div class="ClassMember"><div class="Member">degrees</div><div class="Parentheses">(</div>rad:<div class="ParamType">float</div><div class="Parentheses">)</div>&nbsp;<div class="Arrow">-&gt;</div> <div class="RetType">float</div></div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

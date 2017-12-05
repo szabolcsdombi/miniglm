@@ -11,7 +11,7 @@ types = (Vec2, Vec3, Vec4, Mat2, Mat3, Mat4, Quat)
 
 def decorate(extra):
     extra = extra.replace('\'', '').replace('self, ', '').replace('(self)', '').replace('>', '&gt;').replace(' ', '&nbsp;')
-    extra = re.sub(r'(\-&gt;)&nbsp;(.+)', r'<div class="Arrow">\1</div> <div class="RetType">\2</div>', extra)
+    extra = re.sub(r'(\-&gt;)&nbsp;(.+)', r'<div class="Arrow">\1</div>&nbsp;<div class="RetType">\2</div>', extra)
     extra = re.sub(r':([^\),]+)', r':<div class="ParamType">\1</div>', extra)
     extra = re.sub(r'(\(|\))', r'<div class="Parentheses">\1</div>', extra)
     return extra

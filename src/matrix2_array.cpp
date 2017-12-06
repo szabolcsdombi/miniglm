@@ -3,15 +3,6 @@
 #define N 2
 
 PyObject * GLMMat2Array_tp_new(PyTypeObject * type, PyObject * args, PyObject * kwargs){
-    
-    PyObject * iterable;
-	int arg_ok = PyArg_ParseTuple(args, "O", &iterable);
-
-	if(!arg_ok){
-		PyErr_Format(PyExc_Exception, "Missing parameter!");
-		return 0;
-	}
-
     GLMMat2Array * self = (GLMMat2Array *)type->tp_alloc(type, 0);
 
     if(self){
@@ -26,7 +17,13 @@ void GLMMat2Array_tp_dealloc(GLMMat2Array * self){
 }
 
 int GLMMat2Array_tp_init(GLMMat2Array * self, PyObject * args, PyObject * kwargs){
-    PyObject * iterable = PyTuple_GET_ITEM(args, 0);
+    PyObject * iterable;
+
+    int arg_ok = PyArg_ParseTuple(args, "O", &iterable);
+
+    if(arg_ok == 0){
+        return -1;
+    }
     
     if(Py_TYPE(iterable) == &PyTuple_Type && PyTuple_GET_SIZE(iterable) % (N * N) == 0){
         self->size = PyTuple_GET_SIZE(iterable) / (N * N);

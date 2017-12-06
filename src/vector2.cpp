@@ -281,7 +281,14 @@ PyBufferProcs GLMVec2_tp_as_buffer = {
 };
 
 PyObject * GLMVec2_tp_meth_dot(GLMVec2 * lhs, PyObject * args) {
-	PyObject * rhs = PyTuple_GetItem(args, 0);
+	PyObject * rhs;
+	
+	int arg_ok = PyArg_ParseTuple(args, "O", &rhs);
+
+	if(!arg_ok){
+		PyErr_Format(PyExc_Exception, "Missing parameter!");
+		return 0;
+	}
 	if (Py_TYPE(rhs) == &GLMVec2_Type) {
 		return PyFloat_FromDouble(glm::dot(lhs->val, ((GLMVec2 *)rhs)->val));
 	}
@@ -289,7 +296,14 @@ PyObject * GLMVec2_tp_meth_dot(GLMVec2 * lhs, PyObject * args) {
 }
 
 PyObject * GLMVec2_tp_meth_reflect(GLMVec2 * self, PyObject * args) {
-	PyObject * norm = PyTuple_GetItem(args, 0);
+	PyObject * norm;
+	
+	int arg_ok = PyArg_ParseTuple(args, "O", &norm);
+
+	if(!arg_ok){
+		PyErr_Format(PyExc_Exception, "Missing parameter!");
+		return 0;
+	}
 	if (Py_TYPE(norm) == &GLMVec2_Type) {
 		GLMVec2 * res = (GLMVec2 *)GLMVec2_tp_new(&GLMVec2_Type, 0, 0);
 		res->val = glm::reflect(self->val, ((GLMVec2 *)norm)->val);
@@ -299,8 +313,17 @@ PyObject * GLMVec2_tp_meth_reflect(GLMVec2 * self, PyObject * args) {
 }
 
 PyObject * GLMVec2_tp_meth_refract(GLMVec2 * self, PyObject * args) {
-	PyObject * norm = PyTuple_GetItem(args, 0);
+	PyObject * norm;
+	
+	int arg_ok = PyArg_ParseTuple(args, "O", &norm);
+
+	if(!arg_ok){
+		PyErr_Format(PyExc_Exception, "Missing parameter!");
+		return 0;
+	}
+
 	float eta = (float)PyFloat_AsDouble(PyTuple_GetItem(args, 1));
+	
 	if (PyErr_Occurred()) {
 		return 0;
 	}

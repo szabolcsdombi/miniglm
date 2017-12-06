@@ -440,7 +440,14 @@ PyBufferProcs GLMVec3Array_tp_as_buffer = {
 };
 
 PyObject * GLMVec3Array_tp_meth_dot(GLMVec3Array * lhs, PyObject * args) {
-	PyObject * rhs = PyTuple_GetItem(args, 0);
+	PyObject * rhs;
+	int arg_ok = PyArg_ParseTuple(args, "O", &rhs);
+
+	if(!arg_ok){
+		PyErr_Format(PyExc_Exception, "Missing parameter!");
+		return 0;
+	}
+
 	if (Py_TYPE(rhs) == &GLMVec3Array_Type) {
 		int lhs_size = ((GLMVec3Array *)lhs)->size;
 		int rhs_size = ((GLMVec3Array *)rhs)->size;
@@ -461,7 +468,15 @@ PyObject * GLMVec3Array_tp_meth_dot(GLMVec3Array * lhs, PyObject * args) {
 
 
 PyObject * GLMVec3Array_tp_meth_cross(GLMVec3Array * lhs, PyObject * args){
-    PyObject * rhs = PyTuple_GetItem(args, 0);
+    
+	PyObject * rhs;
+	int arg_ok = PyArg_ParseTuple(args, "O", &rhs);
+
+	if(!arg_ok){
+		PyErr_Format(PyExc_Exception, "Missing parameter!");
+		return 0;
+	}
+
     if(Py_TYPE(rhs) == &GLMVec3Array_Type){
         int lhs_size = ((GLMVec3Array *)lhs)->size;
 		int rhs_size = ((GLMVec3Array *)rhs)->size;
@@ -471,7 +486,7 @@ PyObject * GLMVec3Array_tp_meth_cross(GLMVec3Array * lhs, PyObject * args){
         }
         glm::vec3 * lhs_val = ((GLMVec3Array *)lhs)->val;
 		glm::vec3 * rhs_val = ((GLMVec3Array *)rhs)->val;
-        GLMVec3Array * res;
+        GLMVec3Array * res = (GLMVec3Array *)GLMVec3Array_tp_new(&GLMVec3Array_Type, 0, 0);
         res->size = lhs_size;
         res->val = new glm::vec3[lhs_size + 1];
 		for(int i = 0; i < lhs_size; i++) {
@@ -502,7 +517,11 @@ PyObject * GLMVec3Array_tp_get_length(GLMVec3Array * self, void * closure) {
 
 PyObject * GLMVec3Array_tp_get_normal(GLMVec3Array * self, void * closure) {
 	GLMVec3Array * res = (GLMVec3Array *)GLMVec3Array_tp_new(&GLMVec3Array_Type, 0, 0);
+	
 	int size = ((GLMVec3Array *)self)->size;
+	res->size = size;
+	res->val = new glm::vec3[res->size + 1];
+	
 	glm::vec3 * val = ((GLMVec3Array *)self)->val;
 	for (int i = 0; i < size; ++i) {
 		res->val[i] = glm::normalize(val[i]);

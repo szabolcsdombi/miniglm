@@ -117,13 +117,9 @@ PyObject * GLMVec2Array_tp_new(PyTypeObject * type, PyObject * args, PyObject * 
 PyObject * GLMVec3Array_tp_new(PyTypeObject * type, PyObject * args, PyObject * kwargs);
 PyObject * GLMVec4Array_tp_new(PyTypeObject * type, PyObject * args, PyObject * kwargs);
 
-PyObject * GLMMat2_tp_new(PyTypeObject * type, PyObject * args, PyObject * kwargs);
-PyObject * GLMMat3_tp_new(PyTypeObject * type, PyObject * args, PyObject * kwargs);
-PyObject * GLMMat4_tp_new(PyTypeObject * type, PyObject * args, PyObject * kwargs);
-
-PyObject * GLMMatArray2_tp_new(PyTypeObject * type, PyObject * args, PyObject * kwargs);
-PyObject * GLMMatArray3_tp_new(PyTypeObject * type, PyObject * args, PyObject * kwargs);
-PyObject * GLMMatArray4_tp_new(PyTypeObject * type, PyObject * args, PyObject * kwargs);
+PyObject * GLMMat2Array_tp_new(PyTypeObject * type, PyObject * args, PyObject * kwargs);
+PyObject * GLMMat3Array_tp_new(PyTypeObject * type, PyObject * args, PyObject * kwargs);
+PyObject * GLMMat4Arra4_tp_new(PyTypeObject * type, PyObject * args, PyObject * kwargs);
 
 PyObject * GLMQuatArray_tp_new(PyTypeObject * type, PyObject * args, PyObject * kwargs);
 

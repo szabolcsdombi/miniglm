@@ -97,7 +97,7 @@ PyObject * GLMMat4Array_nb_add(PyObject * lhs, PyObject * rhs){
             return 0;
         }
 
-        GLMMat4Array * res;
+        GLMMat4Array * res = (GLMMat4Array *)GLMMat4Array_tp_new(&GLMMat4Array_Type, 0, 0);
         res->size = lhs_size;
         res->val = new glm::mat4[res->size + 1];
 
@@ -124,7 +124,7 @@ PyObject * GLMMat4Array_nb_subtract(PyObject * lhs, PyObject * rhs){
             return 0;
         }
 
-        GLMMat4Array * res;
+        GLMMat4Array * res = (GLMMat4Array *)GLMMat4Array_tp_new(&GLMMat4Array_Type, 0, 0);
         res->size = lhs_size;
         res->val = new glm::mat4[res->size + 1];
 
@@ -151,7 +151,7 @@ PyObject * GLMMat4Array_nb_multiply(PyObject * lhs, PyObject * rhs){
             return 0;
         }
 
-        GLMMat4Array * res;
+        GLMMat4Array * res = (GLMMat4Array *)GLMMat4Array_tp_new(&GLMMat4Array_Type, 0, 0);
         res->size = lhs_size;
         res->val = new glm::mat4[res->size + 1];
 
@@ -175,7 +175,7 @@ PyObject * GLMMat4Array_nb_multiply(PyObject * lhs, PyObject * rhs){
                 return 0;
             }
 
-            GLMVec4Array * res;
+            GLMVec4Array * res = (GLMVec4Array *)GLMVec4Array_tp_new(&GLMVec4Array_Type, 0, 0);
             res->size = lhs_size;
             res->val = new glm::vec4[res->size + 1];
 
@@ -192,7 +192,7 @@ PyObject * GLMMat4Array_nb_multiply(PyObject * lhs, PyObject * rhs){
         
         float scalar = (float)PyFloat_AsDouble(rhs);
         if(!PyErr_Occurred()){
-            GLMMat4Array * res;
+            GLMMat4Array * res = (GLMMat4Array *)GLMMat4Array_tp_new(&GLMMat4Array_Type, 0, 0);
             int lhs_size = ((GLMMat4Array*)lhs)->size;
             res->size = lhs_size;
             res->val = new glm::mat4[lhs_size + 1];
@@ -209,7 +209,7 @@ PyObject * GLMMat4Array_nb_multiply(PyObject * lhs, PyObject * rhs){
     if(Py_TYPE(rhs) == &GLMMat4Array_Type){
         float lhs_float = (float)PyFloat_AsDouble(lhs);
         if(!PyErr_Occurred()){            
-            GLMMat4Array * res;
+            GLMMat4Array * res = (GLMMat4Array *)GLMMat4Array_tp_new(&GLMMat4Array_Type, 0, 0);
             int rhs_size = ((GLMMat4Array *)rhs)->size;
             res->size = rhs_size;
             res->val = new glm::mat4[rhs_size + 1];
@@ -232,7 +232,7 @@ PyObject * GLMMat4Array_nb_true_divide(PyObject * lhs, PyObject * rhs){
         float rhs_float = (float)PyFloat_AsDouble(rhs);
         if(!PyErr_Occurred()){
             
-            GLMMat4Array * res;
+            GLMMat4Array * res = (GLMMat4Array *)GLMMat4Array_tp_new(&GLMMat4Array_Type, 0, 0);
             int lhs_size = ((GLMMat4Array *)lhs)->size;
             res->size = lhs_size;
             res->val = new glm::mat4[lhs_size + 1];
@@ -249,7 +249,7 @@ PyObject * GLMMat4Array_nb_true_divide(PyObject * lhs, PyObject * rhs){
         float lhs_float = (float)PyFloat_AsDouble(lhs);
         if(!PyErr_Occurred()){
             
-            GLMMat4Array * res;
+            GLMMat4Array * res = (GLMMat4Array *)GLMMat4Array_tp_new(&GLMMat4Array_Type, 0, 0);
             int rhs_size = ((GLMMat4Array *)rhs)->size;
             res->size = rhs_size;
             res->val = new glm::mat4[rhs_size + 1];
@@ -350,7 +350,7 @@ PyObject * GLMMat4Array_nb_inplace_true_divide(PyObject * lhs, PyObject * rhs){
 }
 
 PyObject * GLMMat4Array_nb_negative(PyObject * self){
-    GLMMat4Array * res;
+    GLMMat4Array * res = (GLMMat4Array *)GLMMat4Array_tp_new(&GLMMat4Array_Type, 0, 0);
     res->size = ((GLMMat4Array *)self)->size;
     res->val = new glm::mat4[res->size + 1];
     int self_size = res->size;
@@ -363,7 +363,7 @@ PyObject * GLMMat4Array_nb_negative(PyObject * self){
 }
 
 PyObject * GLMMat4Array_nb_positive(PyObject * self){
-    GLMMat4Array * res;
+    GLMMat4Array * res = (GLMMat4Array *)GLMMat4Array_tp_new(&GLMMat4Array_Type, 0, 0);
     res->size = ((GLMMat4Array *)self)->size;
     res->val = new glm::mat4[res->size + 1];
     int self_size = res->size;
@@ -477,7 +477,7 @@ PyBufferProcs GLMMat4Array_tp_as_buffer = {
 
 PyObject * GLMMat4Array_tp_meth_row(GLMMat2 * self, PyObject * args){
     int id = PyLong_AsLong(PyTuple_GetItem(args, 0));
-    GLMVec4Array * res;
+    GLMVec4Array * res = (GLMVec4Array *)GLMVec4Array_tp_new(&GLMVec4Array_Type, 0, 0);
     res->size = ((GLMMat4Array *)self)->size;
     res->val = new glm::vec4[res->size + 1];
     int size = res->size;
@@ -491,7 +491,7 @@ PyObject * GLMMat4Array_tp_meth_row(GLMMat2 * self, PyObject * args){
 
 PyObject * GLMMat4Array_tp_meth_col(GLMMat2 * self, PyObject * args){
     int id = PyLong_AsLong(PyTuple_GetItem(args, 0));
-    GLMVec4Array * res;
+    GLMVec4Array * res = (GLMVec4Array *)GLMVec4Array_tp_new(&GLMVec4Array_Type, 0, 0);
     res->size = ((GLMMat4Array *)self)->size;
     res->val = new glm::vec4[res->size + 1];
     int size = res->size;
@@ -510,7 +510,7 @@ PyMethodDef GLMMat4Array_tp_methods[] = {
 };
 
 PyObject * GLMMat4Array_tp_get_trans(GLMMat4Array * self, void * closure){
-    GLMMat4Array * res;
+    GLMMat4Array * res = (GLMMat4Array *)GLMMat4Array_tp_new(&GLMMat4Array_Type, 0, 0);
     int size = self->size;
     res->size = size;
     res->val = new glm::mat4[size + 1];
@@ -533,7 +533,7 @@ PyObject * GLMMat4Array_tp_get_det(GLMMat4Array * self, void * closure){
 }
 
 PyObject * GLMMat4Array_tp_get_inv(GLMMat4Array * self, void * closure){
-    GLMMat4Array * res;
+    GLMMat4Array * res = (GLMMat4Array *)GLMMat4Array_tp_new(&GLMMat4Array_Type, 0, 0);
     int size = self->size;
     res->size = size;
     res->val = new glm::mat4[size + 1];

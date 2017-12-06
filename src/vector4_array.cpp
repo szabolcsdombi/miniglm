@@ -441,7 +441,14 @@ PyBufferProcs GLMVec4Array_tp_as_buffer = {
 };
 
 PyObject * GLMVec4Array_tp_meth_dot(GLMVec4Array * lhs, PyObject * args) {
-	PyObject * rhs = PyTuple_GetItem(args, 0);
+	PyObject * rhs;
+	int arg_ok = PyArg_ParseTuple(args, "O", &rhs);
+
+	if(!arg_ok){
+		PyErr_Format(PyExc_Exception, "Missing parameter!");
+		return 0;
+	}
+
 	if (Py_TYPE(rhs) == &GLMVec4Array_Type) {
 		int lhs_size = ((GLMVec4Array *)lhs)->size;
 		int rhs_size = ((GLMVec4Array *)rhs)->size;
@@ -479,6 +486,8 @@ PyObject * GLMVec4Array_tp_get_length(GLMVec4Array * self, void * closure) {
 PyObject * GLMVec4Array_tp_get_normal(GLMVec4Array * self, void * closure) {
 	GLMVec4Array * res = (GLMVec4Array *)GLMVec4Array_tp_new(&GLMVec4Array_Type, 0, 0);
 	int size = ((GLMVec4Array *)self)->size;
+	res->size = size;
+	res->val = new glm::vec4[res->size + 1];
 	glm::vec4 * val = ((GLMVec4Array *)self)->val;
 	for (int i = 0; i < size; ++i) {
 		res->val[i] = glm::normalize(val[i]);

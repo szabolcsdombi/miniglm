@@ -84,7 +84,7 @@ PyObject * GLMMat2Array_nb_add(PyObject * lhs, PyObject * rhs){
             return 0;
         }
 
-        GLMMat2Array * res;
+        GLMMat2Array * res = (GLMMat2Array *)GLMMat2Array_tp_new(&GLMMat2Array_Type, 0, 0);
         res->size = lhs_size;
         res->val = new glm::mat2[res->size + 1];
 
@@ -111,7 +111,7 @@ PyObject * GLMMat2Array_nb_subtract(PyObject * lhs, PyObject * rhs){
             return 0;
         }
 
-        GLMMat2Array * res;
+        GLMMat2Array * res = (GLMMat2Array *)GLMMat2Array_tp_new(&GLMMat2Array_Type, 0, 0);
         res->size = lhs_size;
         res->val = new glm::mat2[res->size + 1];
 
@@ -138,7 +138,7 @@ PyObject * GLMMat2Array_nb_multiply(PyObject * lhs, PyObject * rhs){
             return 0;
         }
 
-        GLMMat2Array * res;
+        GLMMat2Array * res = (GLMMat2Array *)GLMMat2Array_tp_new(&GLMMat2Array_Type, 0, 0);
         res->size = lhs_size;
         res->val = new glm::mat2[res->size + 1];
 
@@ -162,7 +162,7 @@ PyObject * GLMMat2Array_nb_multiply(PyObject * lhs, PyObject * rhs){
                 return 0;
             }
 
-            GLMVec2Array * res;
+            GLMVec2Array * res = (GLMVec2Array *)GLMVec2Array_tp_new(&GLMVec2Array_Type, 0, 0);
             res->size = lhs_size;
             res->val = new glm::vec2[res->size + 1];
 
@@ -179,7 +179,7 @@ PyObject * GLMMat2Array_nb_multiply(PyObject * lhs, PyObject * rhs){
         
         float scalar = (float)PyFloat_AsDouble(rhs);
         if(!PyErr_Occurred()){
-            GLMMat2Array * res;
+            GLMMat2Array * res = (GLMMat2Array *)GLMMat2Array_tp_new(&GLMMat2Array_Type, 0, 0);
             int lhs_size = ((GLMMat2Array*)lhs)->size;
             res->size = lhs_size;
             res->val = new glm::mat2[lhs_size + 1];
@@ -196,7 +196,7 @@ PyObject * GLMMat2Array_nb_multiply(PyObject * lhs, PyObject * rhs){
     if(Py_TYPE(rhs) == &GLMMat2Array_Type){
         float lhs_float = (float)PyFloat_AsDouble(lhs);
         if(!PyErr_Occurred()){            
-            GLMMat2Array * res;
+            GLMMat2Array * res = (GLMMat2Array *)GLMMat2Array_tp_new(&GLMMat2Array_Type, 0, 0);
             int rhs_size = ((GLMMat2Array *)rhs)->size;
             res->size = rhs_size;
             res->val = new glm::mat2[rhs_size + 1];
@@ -219,7 +219,7 @@ PyObject * GLMMat2Array_nb_true_divide(PyObject * lhs, PyObject * rhs){
         float rhs_float = (float)PyFloat_AsDouble(rhs);
         if(!PyErr_Occurred()){
             
-            GLMMat2Array * res;
+            GLMMat2Array * res = (GLMMat2Array *)GLMMat2Array_tp_new(&GLMMat2Array_Type, 0, 0);
             int lhs_size = ((GLMMat2Array *)lhs)->size;
             res->size = lhs_size;
             res->val = new glm::mat2[lhs_size + 1];
@@ -236,7 +236,7 @@ PyObject * GLMMat2Array_nb_true_divide(PyObject * lhs, PyObject * rhs){
         float lhs_float = (float)PyFloat_AsDouble(lhs);
         if(!PyErr_Occurred()){
             
-            GLMMat2Array * res;
+            GLMMat2Array * res = (GLMMat2Array *)GLMMat2Array_tp_new(&GLMMat2Array_Type, 0, 0);
             int rhs_size = ((GLMMat2Array *)rhs)->size;
             res->size = rhs_size;
             res->val = new glm::mat2[rhs_size + 1];
@@ -337,7 +337,7 @@ PyObject * GLMMat2Array_nb_inplace_true_divide(PyObject * lhs, PyObject * rhs){
 }
 
 PyObject * GLMMat2Array_nb_negative(PyObject * self){
-    GLMMat2Array * res;
+    GLMMat2Array * res = (GLMMat2Array *)GLMMat2Array_tp_new(&GLMMat2Array_Type, 0, 0);
     res->size = ((GLMMat2Array *)self)->size;
     res->val = new glm::mat2[res->size + 1];
     int self_size = res->size;
@@ -350,7 +350,7 @@ PyObject * GLMMat2Array_nb_negative(PyObject * self){
 }
 
 PyObject * GLMMat2Array_nb_positive(PyObject * self){
-    GLMMat2Array * res;
+    GLMMat2Array * res = (GLMMat2Array *)GLMMat2Array_tp_new(&GLMMat2Array_Type, 0, 0);
     res->size = ((GLMMat2Array *)self)->size;
     res->val = new glm::mat2[res->size + 1];
     int self_size = res->size;
@@ -464,7 +464,7 @@ PyBufferProcs GLMMat2Array_tp_as_buffer = {
 
 PyObject * GLMMat2Array_tp_meth_row(GLMMat2 * self, PyObject * args){
     int id = PyLong_AsLong(PyTuple_GetItem(args, 0));
-    GLMVec2Array * res;
+    GLMVec2Array * res = (GLMVec2Array *)GLMVec2Array_tp_new(&GLMVec2Array_Type, 0, 0);
     res->size = ((GLMMat2Array *)self)->size;
     res->val = new glm::vec2[res->size + 1];
     int size = res->size;
@@ -478,7 +478,7 @@ PyObject * GLMMat2Array_tp_meth_row(GLMMat2 * self, PyObject * args){
 
 PyObject * GLMMat2Array_tp_meth_col(GLMMat2 * self, PyObject * args){
     int id = PyLong_AsLong(PyTuple_GetItem(args, 0));
-    GLMVec2Array * res;
+    GLMVec2Array * res = (GLMVec2Array *)GLMVec2Array_tp_new(&GLMVec2Array_Type, 0, 0);
     res->size = ((GLMMat2Array *)self)->size;
     res->val = new glm::vec2[res->size + 1];
     int size = res->size;
@@ -497,7 +497,7 @@ PyMethodDef GLMMat2Array_tp_methods[] = {
 };
 
 PyObject * GLMMat2Array_tp_get_trans(GLMMat2Array * self, void * closure){
-    GLMMat2Array * res;
+    GLMMat2Array * res = (GLMMat2Array *)GLMMat2Array_tp_new(&GLMMat2Array_Type, 0, 0);
     int size = self->size;
     res->size = size;
     res->val = new glm::mat2[size + 1];
@@ -520,7 +520,7 @@ PyObject * GLMMat2Array_tp_get_det(GLMMat2Array * self, void * closure){
 }
 
 PyObject * GLMMat2Array_tp_get_inv(GLMMat2Array * self, void * closure){
-    GLMMat2Array * res;
+    GLMMat2Array * res = (GLMMat2Array *)GLMMat2Array_tp_new(&GLMMat2Array_Type, 0, 0);
     int size = self->size;
     res->size = size;
     res->val = new glm::mat2[size + 1];

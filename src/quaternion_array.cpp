@@ -109,7 +109,7 @@ PyObject * GLMQuatArray_nb_multiply(PyObject * lhs, PyObject * rhs){
         glm::quat * lhs_val = ((GLMQuatArray *)lhs)->val;
         glm::quat * rhs_val = ((GLMQuatArray *)rhs)->val;
 
-        GLMQuatArray * res;
+        GLMQuatArray * res = (GLMQuatArray *)GLMQuatArray_tp_new(&GLMQuatArray_Type, 0, 0);
         res->size = lhs_size;
         res->val = new glm::quat[res->size + 1];
         
@@ -133,7 +133,7 @@ PyObject * GLMQuatArray_nb_multiply(PyObject * lhs, PyObject * rhs){
             glm::quat * lhs_val = ((GLMQuatArray *)lhs)->val;
             glm::vec3 * rhs_val = ((GLMVec3Array *)rhs)->val;
 
-            GLMVec3Array * res;
+            GLMVec3Array * res = (GLMVec3Array *)GLMVec3Array_tp_new(&GLMVec3Array_Type, 0, 0);
             res->size = lhs_size;
             res->val = new glm::vec3[res->size + 1];
 
@@ -151,7 +151,7 @@ PyObject * GLMQuatArray_nb_multiply(PyObject * lhs, PyObject * rhs){
             }
             int size = ((GLMQuatArray *)lhs)->size;
 
-            GLMMat3Array * res;
+            GLMMat3Array * res = (GLMMat3Array *)GLMMat3Array_tp_new(&GLMMat3Array_Type, 0, 0);
             res->size = size;
             res->val = new glm::mat3[res->size + 1];
 
@@ -166,7 +166,7 @@ PyObject * GLMQuatArray_nb_multiply(PyObject * lhs, PyObject * rhs){
         float rhs_float = (float)PyFloat_AsDouble(rhs);
         if(!PyErr_Occurred()){
             int size = ((GLMQuatArray *)lhs)->size;
-            GLMQuatArray * res;
+            GLMQuatArray * res = (GLMQuatArray *)GLMQuatArray_tp_new(&GLMQuatArray_Type, 0, 0);
             res->size = size;
             res->val = new glm::quat[res->size + 1];
 
@@ -186,7 +186,7 @@ PyObject * GLMQuatArray_nb_true_divide(PyObject * lhs, PyObject * rhs){
         float rhs_float = PyFloat_AsDouble(rhs);
         if(!PyErr_Occurred()){
             int size = ((GLMQuatArray *)lhs)->size;
-            GLMQuatArray * res;
+            GLMQuatArray * res = (GLMQuatArray *)GLMQuatArray_tp_new(&GLMQuatArray_Type, 0, 0);
             res->size = size;
             res->val = new glm::quat[res->size + 1];
 
@@ -250,7 +250,7 @@ PyObject * GLMQuatArray_nb_inplace_true_divide(PyObject * lhs, PyObject * rhs){
 
 PyObject * GLMQuatArray_nb_negative(GLMQuatArray * self){
     int size = self->size;
-    GLMQuatArray * res;
+    GLMQuatArray * res = (GLMQuatArray *)GLMQuatArray_tp_new(&GLMQuatArray_Type, 0, 0);
     res->size = size;
     res->val = new glm::quat[res->size + 1];
     for(int i = 0; i < size; ++i){
@@ -262,7 +262,7 @@ PyObject * GLMQuatArray_nb_negative(GLMQuatArray * self){
 
 PyObject * GLMQuatArray_nb_positive(GLMQuatArray * self){
     int size = self->size;
-    GLMQuatArray * res;
+    GLMQuatArray * res = (GLMQuatArray *)GLMQuatArray_tp_new(&GLMQuatArray_Type, 0, 0);
     res->size = size;
     res->val = new glm::quat[res->size + 1];
     for(int i = 0; i < size; ++i){
@@ -399,7 +399,7 @@ PyObject * GLMQuatArray_tp_meth_cross(GLMQuatArray * lhs, PyObject * args){
         }
 
         int size = lhs->size;
-        GLMQuatArray * res;
+        GLMQuatArray * res = (GLMQuatArray *)GLMQuatArray_tp_new(&GLMQuatArray_Type, 0, 0);
         res->size = size;
         res->val = new glm::quat[res->size + 1];
 
@@ -425,7 +425,7 @@ PyObject * GLMQuatArray_tp_meth_lerp(GLMQuatArray * lhs, PyObject * args){
         }
 
         int size = lhs->size;
-        GLMQuatArray * res;
+        GLMQuatArray * res = (GLMQuatArray *)GLMQuatArray_tp_new(&GLMQuatArray_Type, 0, 0);
         res->size = size;
         res->val = new glm::quat[res->size + 1];
 
@@ -435,6 +435,7 @@ PyObject * GLMQuatArray_tp_meth_lerp(GLMQuatArray * lhs, PyObject * args){
 
         return (PyObject *)res;
     }
+    return 0;
 }
 
 PyObject * GLMQuatArray_tp_meth_slerp(GLMQuatArray * lhs, PyObject * args){
@@ -450,7 +451,7 @@ PyObject * GLMQuatArray_tp_meth_slerp(GLMQuatArray * lhs, PyObject * args){
         }
 
         int size = lhs->size;
-        GLMQuatArray * res;
+        GLMQuatArray * res = (GLMQuatArray *)GLMQuatArray_tp_new(&GLMQuatArray_Type, 0, 0);
         res->size = size;
         res->val = new glm::quat[res->size + 1];
 
@@ -460,6 +461,7 @@ PyObject * GLMQuatArray_tp_meth_slerp(GLMQuatArray * lhs, PyObject * args){
 
         return (PyObject *)res;
     }
+    return 0;
 }
 
 PyMethodDef GLMQuatArray_tp_methods[] = {
@@ -472,7 +474,7 @@ PyMethodDef GLMQuatArray_tp_methods[] = {
 
 PyObject * GLMQuatArray_tp_get_conj(GLMQuatArray * self, void * closure){
     int size = self->size;
-    GLMQuatArray * res;
+    GLMQuatArray * res = (GLMQuatArray *)GLMQuatArray_tp_new(&GLMQuatArray_Type, 0, 0);
     res->size = size;
     res->val = new glm::quat[res->size + 1];
 
@@ -486,7 +488,7 @@ PyObject * GLMQuatArray_tp_get_conj(GLMQuatArray * self, void * closure){
 
 PyObject * GLMQuatArray_tp_get_inv(GLMQuatArray * self, void * closure){
     int size = self->size;
-    GLMQuatArray * res;
+    GLMQuatArray * res = (GLMQuatArray *)GLMQuatArray_tp_new(&GLMQuatArray_Type, 0, 0);
     res->size = size;
     res->val = new glm::quat[res->size + 1];
 
@@ -510,7 +512,7 @@ PyObject * GLMQuatArray_tp_get_length(GLMQuatArray * self, void * closure){
 
 PyObject * GLMQuatArray_tp_get_normal(GLMQuatArray * self, void * closure){
     int size = self->size;
-    GLMQuatArray * res;
+    GLMQuatArray * res = (GLMQuatArray *)GLMQuatArray_tp_new(&GLMQuatArray_Type, 0, 0);
     res->size = size;
     res->val = new glm::quat[res->size + 1];
 
@@ -523,7 +525,7 @@ PyObject * GLMQuatArray_tp_get_normal(GLMQuatArray * self, void * closure){
 
 PyObject * GLMQuatArray_tp_get_axis(GLMQuatArray * self, void * closure){
     int size = self->size;
-    GLMVec3Array * res;
+    GLMVec3Array * res = (GLMVec3Array *)GLMVec3Array_tp_new(&GLMVec3Array_Type, 0, 0);
     res->size = size;
     res->val = new glm::vec3[res->size + 1];
 

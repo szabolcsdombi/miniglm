@@ -353,6 +353,10 @@ PyBufferProcs GLMMat2_tp_as_buffer = {
 
 PyObject * GLMMat2_tp_meth_row(GLMMat2 * self, PyObject * args) {
 	int idx = PyLong_AsLong(PyTuple_GetItem(args, 0));
+	if(PyErr_Occurred()){
+		PyErr_Format(PyExc_Exception, "Missing parameter or invalid parameter!");
+		return 0;
+	}
 	GLMVec2 * res = (GLMVec2 *)GLMVec2_tp_new(&GLMVec2_Type, 0, 0);
 	res->val = glm::row(self->val, idx);
 	return (PyObject *)res;
@@ -360,6 +364,10 @@ PyObject * GLMMat2_tp_meth_row(GLMMat2 * self, PyObject * args) {
 
 PyObject * GLMMat2_tp_meth_col(GLMMat2 * self, PyObject * args) {
 	int idx = PyLong_AsLong(PyTuple_GetItem(args, 0));
+	if(PyErr_Occurred()){
+		PyErr_Format(PyExc_Exception, "Missing parameter or invalid parameter!");
+		return 0;
+	}
 	GLMVec2 * res = (GLMVec2 *)GLMVec2_tp_new(&GLMVec2_Type, 0, 0);
 	res->val = glm::column(self->val, idx);
 	return (PyObject *)res;

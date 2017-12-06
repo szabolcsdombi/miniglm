@@ -17,7 +17,7 @@ void GLMMat4Array_tp_dealloc(GLMMat4Array * self){
 }
 
 int GLMMat4Array_tp_init(GLMMat4Array * self, PyObject * args, PyObject * kwargs){
-      PyObject * iterable;
+    PyObject * iterable;
 
     int arg_ok = PyArg_ParseTuple(args, "O", &iterable);
 

@@ -17,7 +17,13 @@ void GLMVec4Array_tp_dealloc(GLMVec4Array * self){
 }
 
 int GLMVec4Array_tp_init(GLMVec4Array * self, PyObject * args, PyObject * kwargs) {
-	PyObject * iterable = PyTuple_GetItem(args, 0);
+	PyObject * iterable;
+
+    int arg_ok = PyArg_ParseTuple(args, "O", &iterable);
+
+    if(!arg_ok){
+        return -1;
+    }
 
 	if (Py_TYPE(iterable) == &PyTuple_Type && PyTuple_GET_SIZE(iterable) % N == 0) {
 		int size = PyTuple_GET_SIZE(iterable) / N;
@@ -441,12 +447,12 @@ PyBufferProcs GLMVec4Array_tp_as_buffer = {
 };
 
 PyObject * GLMVec4Array_tp_meth_dot(GLMVec4Array * lhs, PyObject * args) {
-	PyObject * iterable;
+	PyObject * rhs;
 
-    int arg_ok = PyArg_ParseTuple(args, "O", &iterable);
+    int arg_ok = PyArg_ParseTuple(args, "O", &rhs);
 
     if(!arg_ok){
-        return -1;
+        return 0;
     }
 
 	if (Py_TYPE(rhs) == &GLMVec4Array_Type) {

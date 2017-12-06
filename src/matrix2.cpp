@@ -347,7 +347,7 @@ int GLMMat2_bf_getbuffer(GLMMat2 * self, Py_buffer * view, int flags) {
 }
 
 PyBufferProcs GLMMat2_tp_as_buffer = {
-    (getbufferproc)GLMMat2_bf_getbuffer, // getbufferproc bf_getbuffer;
+	(getbufferproc)GLMMat2_bf_getbuffer, // getbufferproc bf_getbuffer;
 	0, // releasebufferproc bf_releasebuffer;
 };
 

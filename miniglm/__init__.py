@@ -7,11 +7,13 @@
 '''
 
 import os
+import sys
 
-if os.environ.get('READTHEDOCS') == 'True':
+if os.environ.get('READTHEDOCS') == 'True' or sys.argv[0] == 'completion.py':
     from .mock import (
         Vec2, Vec3, Vec4, Mat2, Mat3, Mat4, Quat,
         mat4_perspective, mat4_ortho, mat4_look_at,
+        radians, degrees,
     )
 
 else:
@@ -21,10 +23,20 @@ else:
         mat4_perspective, mat4_ortho, mat4_look_at,
     )
 
+
+    def radians(deg):
+        return deg / 57.2957795131
+
+
+    def degrees(rad):
+        return rad * 57.2957795131
+
+
 __all__ = [
     'Vec2', 'Vec3', 'Vec4', 'Mat2', 'Mat3', 'Mat4', 'Quat',
     'Vec2Array', 'Vec3Array', 'Vec4Array', 'Mat2Array', 'Mat3Array', 'Mat4Array', 'QuatArray',
     'mat4_perspective', 'mat4_ortho', 'mat4_look_at',
+    'radians', 'degrees',
 ]
 
 __version__ = '0.2.4'

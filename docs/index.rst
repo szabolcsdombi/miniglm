@@ -41,7 +41,13 @@ Documentation
 -------------
 
 .. autofunction:: mat4_perspective(fovy, ratio, znear, zfar) -> Mat4
+
+.. literalinclude:: mat4x4_mvp_matrix_1_example.py
+
 .. autofunction:: mat4_ortho(left, right, bottom, top, znear, zfar) -> Mat4
+
+.. literalinclude:: mat4x4_mvp_matrix_2_example.py
+
 .. autofunction:: mat4_look_at(eye, center, up) -> Mat4
 
 .. autoclass:: Vec2

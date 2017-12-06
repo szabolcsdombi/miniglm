@@ -257,7 +257,7 @@ int GLMQuat_bf_getbuffer(GLMQuat * self, Py_buffer * view, int flags) {
 }
 
 PyBufferProcs GLMQuat_tp_as_buffer = {
-    (getbufferproc)GLMQuat_bf_getbuffer, // getbufferproc bf_getbuffer;
+	(getbufferproc)GLMQuat_bf_getbuffer, // getbufferproc bf_getbuffer;
 	0, // releasebufferproc bf_releasebuffer;
 };
 

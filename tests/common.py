@@ -12,3 +12,7 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(len(first), len(second))
         for a, b in zip(first, second):
             self.assertAlmostEqual1(a, b, places, msg, delta)
+
+    def assertNoErrors(self, errors, message=''):
+        if errors:
+            raise AssertionError(message + '\n' + '\n'.join(errors))

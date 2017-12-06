@@ -278,7 +278,7 @@ int GLMVec4_bf_getbuffer(GLMVec4 * self, Py_buffer * view, int flags) {
 }
 
 PyBufferProcs GLMVec4_tp_as_buffer = {
-    (getbufferproc)GLMVec4_bf_getbuffer, // getbufferproc bf_getbuffer;
+	(getbufferproc)GLMVec4_bf_getbuffer, // getbufferproc bf_getbuffer;
 	0, // releasebufferproc bf_releasebuffer;
 };
 

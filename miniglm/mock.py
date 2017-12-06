@@ -24,7 +24,7 @@ class Vec2:
             tuple: tuple
         '''
 
-    def dot(self, rhs) -> float:
+    def dot(self, rhs: 'Vec2') -> float:
         '''
             Args:
                 rhs (Vec2): rhs
@@ -33,7 +33,7 @@ class Vec2:
                 float: dot product
         '''
 
-    def reflect(self, norm) -> 'Vec2':
+    def reflect(self, norm: 'Vec2') -> 'Vec2':
         '''
             Args:
                 norm (Vec2): norm
@@ -42,7 +42,7 @@ class Vec2:
                 Vec2: reflect
         '''
 
-    def refract(self, norm, eta) -> 'Vec2':
+    def refract(self, norm: 'Vec2', eta: float) -> 'Vec2':
         '''
             Args:
                 norm (Vec2): norm
@@ -74,7 +74,7 @@ class Vec3:
             tuple: tuple
         '''
 
-    def dot(self, rhs) -> float:
+    def dot(self, rhs: 'Vec3') -> float:
         '''
             Args:
                 rhs (Vec3): rhs
@@ -83,7 +83,7 @@ class Vec3:
                 float: dot product
         '''
 
-    def cross(self, rhs) -> 'Vec3':
+    def cross(self, rhs: 'Vec3') -> 'Vec3':
         '''
             Args:
                 rhs (Vec3): rhs
@@ -92,7 +92,7 @@ class Vec3:
                 Vec3: cross product
         '''
 
-    def reflect(self, norm) -> 'Vec3':
+    def reflect(self, norm: 'Vec3') -> 'Vec3':
         '''
             Args:
                 norm (Vec3): norm
@@ -101,7 +101,7 @@ class Vec3:
                 Vec3: reflect
         '''
 
-    def refract(self, norm, eta) -> 'Vec3':
+    def refract(self, norm: 'Vec3', eta: float) -> 'Vec3':
         '''
             Args:
                 norm (Vec3): norm
@@ -133,7 +133,7 @@ class Vec4:
             tuple: tuple
         '''
 
-    def dot(self, rhs) -> float:
+    def dot(self, rhs: 'Vec4') -> float:
         '''
             Args:
                 rhs (Vec4): rhs
@@ -142,7 +142,7 @@ class Vec4:
                 float: dot product
         '''
 
-    def reflect(self, norm) -> 'Vec4':
+    def reflect(self, norm: 'Vec4') -> 'Vec4':
         '''
             Args:
                 norm (Vec4): norm
@@ -151,7 +151,7 @@ class Vec4:
                 Vec4: reflect
         '''
 
-    def refract(self, norm, eta) -> 'Vec4':
+    def refract(self, norm: 'Vec4', eta: float) -> 'Vec4':
         '''
             Args:
                 norm (Vec4): norm
@@ -187,7 +187,7 @@ class Mat2:
             Mat2: tuple
         '''
 
-    def row(self, i) -> Vec2:
+    def row(self, i: int) -> 'Vec2':
         '''
             Args:
                 i (int): i
@@ -196,7 +196,7 @@ class Mat2:
                 Vec2: row
         '''
 
-    def col(self, i) -> Vec2:
+    def col(self, i: int) -> 'Vec2':
         '''
             Args:
                 i (int): i
@@ -210,18 +210,18 @@ class Mat3:
         pass
 
     @property
-    def trans(self):
+    def trans(self) -> 'Mat3':
         '''
             Mat3: transpose
         '''
 
     @property
-    def det(self):
+    def det(self) -> float:
         '''
             float: determinant
         '''
     @property
-    def inv(self):
+    def inv(self) -> 'Mat3':
         '''
             Mat3: inverse
         '''
@@ -231,7 +231,7 @@ class Mat3:
             Mat3: tuple
         '''
 
-    def row(self, i) -> Vec3:
+    def row(self, i: int) -> 'Vec3':
         '''
             Args:
                 i (int): i
@@ -240,7 +240,7 @@ class Mat3:
                 Vec3: row
         '''
 
-    def col(self, i) -> Vec3:
+    def col(self, i: int) -> 'Vec3':
         '''
             Args:
                 i (int): i
@@ -254,18 +254,18 @@ class Mat4:
         pass
 
     @property
-    def trans(self):
+    def trans(self) -> 'Mat4':
         '''
             Mat4: transpose
         '''
 
     @property
-    def det(self):
+    def det(self) -> float:
         '''
             float: determinant
         '''
     @property
-    def inv(self):
+    def inv(self) -> 'Mat4':
         '''
             Mat4: inverse
         '''
@@ -275,7 +275,7 @@ class Mat4:
             Mat4: tuple
         '''
 
-    def row(self, i) -> Vec4:
+    def row(self, i: int) -> 'Vec4':
         '''
             Args:
                 i (int): i
@@ -284,7 +284,7 @@ class Mat4:
                 Vec4: row
         '''
 
-    def col(self, i) -> Vec4:
+    def col(self, i: int) -> 'Vec4':
         '''
             Args:
                 i (int): i
@@ -322,12 +322,24 @@ class Quat:
         '''
 
     @property
+    def axis(self) -> 'Vec3':
+        '''
+            Vec3: axis
+        '''
+
+    @property
+    def angle(self) -> float:
+        '''
+            float: angle
+        '''
+
+    @property
     def tup(self) -> tuple:
         '''
             tuple: tup
         '''
 
-    def dot(self, rhs) -> float:
+    def dot(self, rhs: 'Quat') -> float:
         '''
             Args:
                 rhs (Quat): rhs
@@ -336,7 +348,7 @@ class Quat:
                 float: dot product
         '''
 
-    def cross(self, rhs) -> 'Quat':
+    def cross(self, rhs: 'Quat') -> 'Quat':
         '''
             Args:
                 rhs (Quat): rhs
@@ -345,7 +357,7 @@ class Quat:
                 Quat: cross product
         '''
 
-    def slerp(self, rhs, coef) -> 'Quat':
+    def slerp(self, rhs: 'Quat', coef: float) -> 'Quat':
         '''
             Args:
                 rhs (Quat): rhs
@@ -355,7 +367,7 @@ class Quat:
                 Quat: slerp
         '''
 
-    def lerp(self, rhs, coef) -> 'Quat':
+    def lerp(self, rhs: 'Quat', coef: float) -> 'Quat':
         '''
             Args:
                 rhs (Quat): rhs
@@ -365,7 +377,7 @@ class Quat:
                 Quat: slerp
         '''
 
-def mat4_perspective(fovy, ratio, znear, zfar) -> Mat4:
+def mat4_perspective(fovy: float, ratio: float, znear: float, zfar: float) -> 'Mat4':
     '''
         Args:
             fovy (float): fovy
@@ -377,7 +389,7 @@ def mat4_perspective(fovy, ratio, znear, zfar) -> Mat4:
             Mat4: perspective
     '''
 
-def mat4_ortho(left, right, bottom, top, znear, zfar) -> Mat4:
+def mat4_ortho(left: float, right: float, bottom: float, top: float, znear: float, zfar: float) -> 'Mat4':
     '''
         Args:
             left (float): left
@@ -391,7 +403,7 @@ def mat4_ortho(left, right, bottom, top, znear, zfar) -> Mat4:
             Mat4: ortho
     '''
 
-def mat4_look_at(eye, center, up) -> Mat4:
+def mat4_look_at(eye: 'Vec3', center: 'Vec3', up: 'Vec3') -> 'Mat4':
     '''
         Args:
             eye (Vec3): eye
@@ -400,4 +412,24 @@ def mat4_look_at(eye, center, up) -> Mat4:
 
         Returns:
             Mat4: look_at
+    '''
+
+
+def radians(deg: float) -> float:
+    '''
+        Args:
+            deg (float): degrees
+
+        Returns:
+            float: degrees converted to radians
+    '''
+
+
+def degrees(rad: float) -> float:
+    '''
+        Args:
+            rad (float): radians
+
+        Returns:
+            float: radians converted to degrees
     '''

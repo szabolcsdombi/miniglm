@@ -13,11 +13,17 @@ PyObject * GLMMat3Array_tp_new(PyTypeObject * type, PyObject * args, PyObject * 
 }
 
 void GLMMat3Array_tp_dealloc(GLMMat3Array * self){
-    Py_TYPE(self)->tp_dealloc((PyObject *)self);
+    Py_TYPE(self)->tp_free((PyObject *)self);
 }
 
 int GLMMat3Array_tp_init(GLMMat3Array * self, PyObject * args, PyObject * kwargs){
-    PyObject * iterable = PyTuple_GET_ITEM(args, 0);
+    PyObject * iterable;
+
+    int arg_ok = PyArg_ParseTuple(args, "O", &iterable);
+
+    if(!arg_ok){
+        return -1;
+    }
     
     if(Py_TYPE(iterable) == &PyTuple_Type && PyTuple_GET_SIZE(iterable) % (N * N) == 0){
         self->size = PyTuple_GET_SIZE(iterable) / (N * N);

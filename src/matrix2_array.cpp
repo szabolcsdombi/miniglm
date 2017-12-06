@@ -13,7 +13,7 @@ PyObject * GLMMat2Array_tp_new(PyTypeObject * type, PyObject * args, PyObject * 
 }
 
 void GLMMat2Array_tp_dealloc(GLMMat2Array * self){
-    Py_TYPE(self)->tp_dealloc((PyObject *)self);
+    Py_TYPE(self)->tp_free((PyObject *)self);
 }
 
 int GLMMat2Array_tp_init(GLMMat2Array * self, PyObject * args, PyObject * kwargs){
@@ -21,7 +21,7 @@ int GLMMat2Array_tp_init(GLMMat2Array * self, PyObject * args, PyObject * kwargs
 
     int arg_ok = PyArg_ParseTuple(args, "O", &iterable);
 
-    if(arg_ok == 0){
+    if(!arg_ok){
         return -1;
     }
     

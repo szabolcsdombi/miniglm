@@ -17,7 +17,13 @@ void GLMQuatArray_tp_dealloc(GLMQuatArray * self){
 }
 
 int GLMQuatArray_tp_init(GLMQuatArray * self, PyObject * args, PyObject * kwargs){
-    PyObject * iterable = PyTuple_GetItem(args, 0);
+    PyObject * iterable;
+
+    int arg_ok = PyArg_ParseTuple(args, "O", &iterable);
+
+    if(!arg_ok){
+        return -1;
+    }
 
     if(Py_TYPE(iterable) == &PyTuple_Type && PyTuple_GET_SIZE(iterable) % N == 0){
         int size = PyTuple_GET_SIZE(iterable) / N;

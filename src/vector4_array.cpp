@@ -441,13 +441,13 @@ PyBufferProcs GLMVec4Array_tp_as_buffer = {
 };
 
 PyObject * GLMVec4Array_tp_meth_dot(GLMVec4Array * lhs, PyObject * args) {
-	PyObject * rhs;
-	int arg_ok = PyArg_ParseTuple(args, "O", &rhs);
+	PyObject * iterable;
 
-	if(!arg_ok){
-		PyErr_Format(PyExc_Exception, "Missing parameter!");
-		return 0;
-	}
+    int arg_ok = PyArg_ParseTuple(args, "O", &iterable);
+
+    if(!arg_ok){
+        return -1;
+    }
 
 	if (Py_TYPE(rhs) == &GLMVec4Array_Type) {
 		int lhs_size = ((GLMVec4Array *)lhs)->size;

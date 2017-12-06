@@ -16,7 +16,17 @@ void GLMMat3_tp_dealloc(GLMMat3 * self) {
 }
 
 int GLMMat3_tp_init(GLMMat3 * self, PyObject * args, PyObject * kwargs) {
-	PyObject * iterable = PyTuple_GetItem(args, 0);
+	PyObject * iterable;
+
+	int args_ok = PyArg_ParseTuple(
+		args,
+		"O",
+		&iterable
+	);
+
+	if (!args_ok) {
+		return -1;
+	}
 
 	if (Py_TYPE(iterable) == &PyTuple_Type && PyTuple_GET_SIZE(iterable) == N * N) {
 		self->val[0][0] = (float)PyFloat_AsDouble(PyTuple_GET_ITEM(iterable, 0));

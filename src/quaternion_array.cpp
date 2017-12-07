@@ -357,7 +357,7 @@ PySequenceMethods GLMQuatArray_tp_as_sequence = {
 
 int GLMQuatArray_bf_getbuffer(GLMQuatArray * self, Py_buffer * view, int flags) {
 	view->buf = (void *)self->val;
-	view->len = sizeof(self->val) * self->size * N;
+	view->len = sizeof(self->val[0]) * self->size;
 	view->itemsize = 1;
 
 	view->format = 0;

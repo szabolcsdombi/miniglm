@@ -461,8 +461,8 @@ PySequenceMethods GLMMat4Array_tp_as_sequence = {
 };
 
 int GLMMat4Array_bf_getbuffer(GLMMat4Array * self, Py_buffer * view, int flags) {
-	view->buf = (void *)&self->val;
-	view->len = sizeof(self->val) * self->size;
+	view->buf = (void *)self->val;
+	view->len = sizeof(self->val[0]) * self->size * N * N;
 	view->itemsize = 1;
 
 	view->format = 0;

@@ -420,13 +420,8 @@ PySequenceMethods GLMVec2Array_tp_as_sequence = {
 };
 
 int GLMVec2Array_bf_getbuffer(GLMVec2Array * self, Py_buffer * view, int flags) {
-<<<<<<< HEAD
 	view->buf = (void *)self->val;
 	view->len = sizeof(self->val[0]) * self->size;
-=======
-	view->buf = (void *)&self->val;
-	view->len = sizeof(self->val);
->>>>>>> parent of 1ed5c19... fixed vec2, 3, 4 getBufferr func
 	view->itemsize = 1;
 
 	view->format = 0;

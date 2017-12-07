@@ -612,7 +612,7 @@ PyTypeObject GLMQuatArray_Type = {
 
 PyObject * GLMQuatArray_Tuple(GLMQuatArray * self){
     int size = self->size;
-    PyObject * res = PyTuple_New(size);
+    PyObject * res = PyTuple_New(size * N);
 
     for(int i = 0; i < size; ++i){
         PyTuple_SET_ITEM(res, i * N + 0, PyFloat_FromDouble(self->val[i][0]));

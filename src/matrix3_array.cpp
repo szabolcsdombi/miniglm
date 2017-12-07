@@ -608,7 +608,7 @@ PyObject * GLMMat3Array_Tuple(GLMMat3Array * self){
         PyTuple_SET_ITEM(tuple, i * N * N + 5, PyFloat_FromDouble(self->val[i][1][1]));
         PyTuple_SET_ITEM(tuple, i * N * N + 6, PyFloat_FromDouble(self->val[i][2][0]));
         PyTuple_SET_ITEM(tuple, i * N * N + 7, PyFloat_FromDouble(self->val[i][2][1]));
-        PyTuple_SET_ITEM(tuple, i * N * N + 8, PyFloat_FromDouble(self->val[i][2][1]));
+        PyTuple_SET_ITEM(tuple, i * N * N + 8, PyFloat_FromDouble(self->val[i][2][2]));
     }
 
     return tuple;

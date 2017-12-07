@@ -426,7 +426,7 @@ PySequenceMethods GLMVec3Array_tp_as_sequence = {
 
 int GLMVec3Array_bf_getbuffer(GLMVec3Array * self, Py_buffer * view, int flags) {
 	view->buf = (void *)self->val;
-	view->len = sizeof(self->va[0]) * self->size * N;
+	view->len = sizeof(self->val[0]) * self->size * N;
 	view->itemsize = 1;
 
 	view->format = 0;

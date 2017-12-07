@@ -29,11 +29,13 @@ int GLMMat2Array_tp_init(GLMMat2Array * self, PyObject * args, PyObject * kwargs
         self->size = PyTuple_GET_SIZE(iterable) / (N * N);
         self->val = new glm::mat2[self->size + 1];
 
-        for(int i = 0; i < self->size; ++i){
-            self->val[i][0][0] = (float)PyFloat_AsDouble(PyTuple_GET_ITEM(iterable, i * N + 0));
-            self->val[i][0][1] = (float)PyFloat_AsDouble(PyTuple_GET_ITEM(iterable, i * N + 1));
-            self->val[i][1][0] = (float)PyFloat_AsDouble(PyTuple_GET_ITEM(iterable, i * N + 2));
-            self->val[i][1][1] = (float)PyFloat_AsDouble(PyTuple_GET_ITEM(iterable, i * N + 3));
+        int size = self->size;
+
+        for(int i = 0; i < size; ++i){
+            self->val[i][0][0] = (float)PyFloat_AsDouble(PyTuple_GET_ITEM(iterable, i * N * N + 0));
+            self->val[i][0][1] = (float)PyFloat_AsDouble(PyTuple_GET_ITEM(iterable, i * N * N + 1));
+            self->val[i][1][0] = (float)PyFloat_AsDouble(PyTuple_GET_ITEM(iterable, i * N * N + 2));
+            self->val[i][1][1] = (float)PyFloat_AsDouble(PyTuple_GET_ITEM(iterable, i * N * N + 3));
         }
 
         if(PyErr_Occurred()){

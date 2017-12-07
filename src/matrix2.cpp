@@ -401,11 +401,18 @@ PyObject * GLMMat2_tp_get_tup(GLMMat2 * self, void * closure) {
 	return GLMMat2_Tuple(self);
 }
 
+PyObject * GLMMat2_tp_get_data(GLMMat2 * self, void * closure) {
+	PyObject * res = PyBytes_FromStringAndSize(0, sizeof(self->val));
+	memcpy(PyBytes_AS_STRING(res), &self->val, sizeof(self->val));
+	return res;
+}
+
 PyGetSetDef GLMMat2_tp_getseters[] = {
 	{(char *)"trans", (getter)GLMMat2_tp_get_trans, 0, 0, 0},
 	{(char *)"det", (getter)GLMMat2_tp_get_det, 0, 0, 0},
 	{(char *)"inv", (getter)GLMMat2_tp_get_inv, 0, 0, 0},
 	{(char *)"tup", (getter)GLMMat2_tp_get_tup, 0, 0, 0},
+	{(char *)"data", (getter)GLMMat2_tp_get_data, 0, 0, 0},
 	{0},
 };
 

@@ -343,10 +343,17 @@ PyObject * GLMVec2_tp_get_tup(GLMVec2 * self, void * closure) {
 	return GLMVec2_Tuple(self);
 }
 
+PyObject * GLMVec2_tp_get_data(GLMVec2 * self, void * closure) {
+	PyObject * res = PyBytes_FromStringAndSize(0, sizeof(self->val));
+	memcpy(PyBytes_AS_STRING(res), &self->val, sizeof(self->val));
+	return res;
+}
+
 PyGetSetDef GLMVec2_tp_getseters[] = {
 	{(char *)"length", (getter)GLMVec2_tp_get_length, 0, 0, 0},
 	{(char *)"normal", (getter)GLMVec2_tp_get_normal, 0, 0, 0},
 	{(char *)"tup", (getter)GLMVec2_tp_get_tup, 0, 0, 0},
+	{(char *)"data", (getter)GLMVec2_tp_get_data, 0, 0, 0},
 	{0},
 };
 

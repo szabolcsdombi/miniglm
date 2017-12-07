@@ -362,6 +362,12 @@ PyObject * GLMQuat_tp_get_tup(GLMQuat * self, void * closure) {
 	return GLMQuat_Tuple(self);
 }
 
+PyObject * GLMQuat_tp_get_data(GLMQuat * self, void * closure) {
+	PyObject * res = PyBytes_FromStringAndSize(0, sizeof(self->val));
+	memcpy(PyBytes_AS_STRING(res), &self->val, sizeof(self->val));
+	return res;
+}
+
 PyGetSetDef GLMQuat_tp_getseters[] = {
 	{(char *)"length", (getter)GLMQuat_tp_get_length, 0, 0, 0},
 	{(char *)"normal", (getter)GLMQuat_tp_get_normal, 0, 0, 0},
@@ -370,6 +376,7 @@ PyGetSetDef GLMQuat_tp_getseters[] = {
 	{(char *)"axis", (getter)GLMQuat_tp_get_axis, 0, 0, 0},
 	{(char *)"angle", (getter)GLMQuat_tp_get_angle, 0, 0, 0},
 	{(char *)"tup", (getter)GLMQuat_tp_get_tup, 0, 0, 0},
+	{(char *)"data", (getter)GLMQuat_tp_get_data, 0, 0, 0},
 	{0},
 };
 

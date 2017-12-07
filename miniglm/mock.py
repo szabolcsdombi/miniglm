@@ -24,6 +24,12 @@ class Vec2:
             tuple: tuple
         '''
 
+    @property
+    def data(self) -> bytes:
+        '''
+            bytes: data
+        '''
+
     def dot(self, rhs: 'Vec2') -> float:
         '''
             Args:
@@ -72,6 +78,12 @@ class Vec3:
     def tup(self) -> tuple:
         '''
             tuple: tuple
+        '''
+
+    @property
+    def data(self) -> bytes:
+        '''
+            bytes: data
         '''
 
     def dot(self, rhs: 'Vec3') -> float:
@@ -133,6 +145,12 @@ class Vec4:
             tuple: tuple
         '''
 
+    @property
+    def data(self) -> bytes:
+        '''
+            bytes: data
+        '''
+
     def dot(self, rhs: 'Vec4') -> float:
         '''
             Args:
@@ -187,6 +205,12 @@ class Mat2:
             Mat2: tuple
         '''
 
+    @property
+    def data(self) -> bytes:
+        '''
+            bytes: data
+        '''
+
     def row(self, i: int) -> 'Vec2':
         '''
             Args:
@@ -231,6 +255,12 @@ class Mat3:
             Mat3: tuple
         '''
 
+    @property
+    def data(self) -> bytes:
+        '''
+            bytes: data
+        '''
+
     def row(self, i: int) -> 'Vec3':
         '''
             Args:
@@ -273,6 +303,12 @@ class Mat4:
     def tup(self) -> tuple:
         '''
             Mat4: tuple
+        '''
+
+    @property
+    def data(self) -> bytes:
+        '''
+            bytes: data
         '''
 
     def row(self, i: int) -> 'Vec4':
@@ -337,6 +373,12 @@ class Quat:
     def tup(self) -> tuple:
         '''
             tuple: tup
+        '''
+
+    @property
+    def data(self) -> bytes:
+        '''
+            bytes: data
         '''
 
     def dot(self, rhs: 'Quat') -> float:

@@ -304,15 +304,14 @@ PyObject * GLMQuat_tp_meth_cross(GLMQuat * lhs, PyObject * args) {
 }
 
 PyObject * GLMQuat_tp_meth_slerp(GLMQuat * lhs, PyObject * args) {
-	PyObject * rhs;
+	PyObject * rhs, * py_coeff;
 	
-	int arg_ok = PyArg_ParseTuple(args, "O", &rhs);
+	int arg_ok = PyArg_ParseTuple(args, "OO", &rhs, &py_coeff);
 
 	if(!arg_ok){
-		PyErr_Format(PyExc_Exception, "Missing parameter!");
 		return 0;
 	}
-	float coef = (float)PyFloat_AsDouble(PyTuple_GetItem(args, 1));
+	float coef = (float)PyFloat_AsDouble(py_coeff);
 	if (PyErr_Occurred()) {
 		return 0;
 	}
@@ -325,12 +324,11 @@ PyObject * GLMQuat_tp_meth_slerp(GLMQuat * lhs, PyObject * args) {
 }
 
 PyObject * GLMQuat_tp_meth_lerp(GLMQuat * lhs, PyObject * args) {
-	PyObject * rhs;
+	PyObject * rhs, * py_coeff;
 	
-	int arg_ok = PyArg_ParseTuple(args, "O", &rhs);
+	int arg_ok = PyArg_ParseTuple(args, "OO", &rhs, &py_coeff);
 
 	if(!arg_ok){
-		PyErr_Format(PyExc_Exception, "Missing parameter!");
 		return 0;
 	}
 	

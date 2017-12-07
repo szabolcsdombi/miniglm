@@ -388,7 +388,7 @@ PyNumberMethods GLMVec4Array_tp_as_number = {
 };
 
 Py_ssize_t GLMVec4Array_sq_length(GLMVec4Array * self) {
-	return N;
+	return N * self->size;
 }
 
 PyObject * GLMVec4Array_sq_item(GLMVec4Array * self, Py_ssize_t key) {

@@ -34,19 +34,19 @@ int GLMMat4Array_tp_init(GLMMat4Array * self, PyObject * args, PyObject * kwargs
             self->val[i][0][0] = (float)PyFloat_AsDouble(PyTuple_GET_ITEM(iterable, i * N * N + 0));
             self->val[i][0][1] = (float)PyFloat_AsDouble(PyTuple_GET_ITEM(iterable, i * N * N + 1));
             self->val[i][0][2] = (float)PyFloat_AsDouble(PyTuple_GET_ITEM(iterable, i * N * N + 2));
-            self->val[i][0][3] = (float)PyFloat_AsDouble(PyTuple_GET_ITEM(iterable, i * N * N + 2));
-            self->val[i][1][0] = (float)PyFloat_AsDouble(PyTuple_GET_ITEM(iterable, i * N * N + 3));
-            self->val[i][1][1] = (float)PyFloat_AsDouble(PyTuple_GET_ITEM(iterable, i * N * N + 4));
-            self->val[i][1][2] = (float)PyFloat_AsDouble(PyTuple_GET_ITEM(iterable, i * N * N + 5));
-            self->val[i][1][3] = (float)PyFloat_AsDouble(PyTuple_GET_ITEM(iterable, i * N * N + 5));
-            self->val[i][2][0] = (float)PyFloat_AsDouble(PyTuple_GET_ITEM(iterable, i * N * N + 6));
-            self->val[i][2][1] = (float)PyFloat_AsDouble(PyTuple_GET_ITEM(iterable, i * N * N + 7));
-            self->val[i][2][2] = (float)PyFloat_AsDouble(PyTuple_GET_ITEM(iterable, i * N * N + 8));
-            self->val[i][2][3] = (float)PyFloat_AsDouble(PyTuple_GET_ITEM(iterable, i * N * N + 8));
-            self->val[i][3][0] = (float)PyFloat_AsDouble(PyTuple_GET_ITEM(iterable, i * N * N + 6));
-            self->val[i][3][1] = (float)PyFloat_AsDouble(PyTuple_GET_ITEM(iterable, i * N * N + 7));
-            self->val[i][3][2] = (float)PyFloat_AsDouble(PyTuple_GET_ITEM(iterable, i * N * N + 8));
-            self->val[i][3][3] = (float)PyFloat_AsDouble(PyTuple_GET_ITEM(iterable, i * N * N + 8));
+            self->val[i][0][3] = (float)PyFloat_AsDouble(PyTuple_GET_ITEM(iterable, i * N * N + 3));
+            self->val[i][1][0] = (float)PyFloat_AsDouble(PyTuple_GET_ITEM(iterable, i * N * N + 4));
+            self->val[i][1][1] = (float)PyFloat_AsDouble(PyTuple_GET_ITEM(iterable, i * N * N + 5));
+            self->val[i][1][2] = (float)PyFloat_AsDouble(PyTuple_GET_ITEM(iterable, i * N * N + 6));
+            self->val[i][1][3] = (float)PyFloat_AsDouble(PyTuple_GET_ITEM(iterable, i * N * N + 7));
+            self->val[i][2][0] = (float)PyFloat_AsDouble(PyTuple_GET_ITEM(iterable, i * N * N + 8));
+            self->val[i][2][1] = (float)PyFloat_AsDouble(PyTuple_GET_ITEM(iterable, i * N * N + 9));
+            self->val[i][2][2] = (float)PyFloat_AsDouble(PyTuple_GET_ITEM(iterable, i * N * N + 10));
+            self->val[i][2][3] = (float)PyFloat_AsDouble(PyTuple_GET_ITEM(iterable, i * N * N + 11));
+            self->val[i][3][0] = (float)PyFloat_AsDouble(PyTuple_GET_ITEM(iterable, i * N * N + 12));
+            self->val[i][3][1] = (float)PyFloat_AsDouble(PyTuple_GET_ITEM(iterable, i * N * N + 13));
+            self->val[i][3][2] = (float)PyFloat_AsDouble(PyTuple_GET_ITEM(iterable, i * N * N + 14));
+            self->val[i][3][3] = (float)PyFloat_AsDouble(PyTuple_GET_ITEM(iterable, i * N * N + 15));
         }
 
         if(PyErr_Occurred()){

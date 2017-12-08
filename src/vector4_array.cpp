@@ -464,11 +464,15 @@ PyObject * GLMVec4Array_tp_meth_dot(GLMVec4Array * lhs, PyObject * args) {
 		}
 		glm::vec4 * lhs_val = ((GLMVec4Array *)lhs)->val;
 		glm::vec4 * rhs_val = ((GLMVec4Array *)rhs)->val;
-		PyObject * res = PyTuple_New(lhs_size);
+		
+		GLMFloatArray * res = (GLMFloatArray *)GLMFloatArray_tp_new(&GLMFloatArray_Type, 0, 0);
+		res->size = lhs_size;
+		res->val = new float[res->size + 1];
 		for (int i = 0; i < lhs_size; ++i) {
-			PyTuple_SET_ITEM(res, i, PyFloat_FromDouble(glm::dot(lhs_val[i], rhs_val[i])));
+			res->val[i] = glm::dot(lhs_val[i], rhs_val[i]);
 		}
-		return res;
+
+		return (PyObject *)res;
 	}
 	return 0;
 }
@@ -482,11 +486,13 @@ PyMethodDef GLMVec4Array_tp_methods[] = {
 PyObject * GLMVec4Array_tp_get_length(GLMVec4Array * self, void * closure) {
 	int size = ((GLMVec4Array *)self)->size;
 	glm::vec4 * val = ((GLMVec4Array *)self)->val;
-	PyObject * res = PyTuple_New(size);
-	for (int i = 0; i < size; ++i) {
-		PyTuple_SET_ITEM(res, i, PyFloat_FromDouble(glm::length(val[i])));
+	GLMFloatArray * res = (GLMFloatArray *)GLMFloatArray_tp_new(&GLMFloatArray_Type, 0, 0);
+	res->size = self->size;
+	res->val = new float[res->size + 1];
+	for (int i = 0; i < self->size; ++i) {
+		res->val[i] = glm::length(self->val[i]);
 	}
-	return res;
+	return (PyObject *)res;
 }
 
 PyObject * GLMVec4Array_tp_get_normal(GLMVec4Array * self, void * closure) {

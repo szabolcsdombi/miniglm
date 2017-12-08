@@ -1,7 +1,7 @@
 import unittest
 import struct
 
-from miniglm import Vec2Array, Vec3Array, Vec4Array, Mat2Array, Mat3Array, Mat4Array, QuatArray
+from miniglm import Vec2Array, Vec3Array, Vec4Array, Mat2Array, Mat3Array, Mat4Array, QuatArray, FloatArray
 from common import MyTestCase
 
 
@@ -32,6 +32,10 @@ class TestCase(MyTestCase):
 
     def test_quat_array_bytes(self):
         a = QuatArray((0, 0, 0, 1 * 2))
+        self.assertAlmostEqual2(a, struct.unpack('f' * len(a), bytes(a)))
+    
+    def test_float_array_bytes(self):
+        a = FloatArray((1, 2, 3) * 1000)
         self.assertAlmostEqual2(a, struct.unpack('f' * len(a), bytes(a)))
 if __name__ == '__main__':
     unittest.main()

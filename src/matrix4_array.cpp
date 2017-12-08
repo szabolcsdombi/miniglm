@@ -538,7 +538,6 @@ PyObject * GLMMat4Array_tp_get_det(GLMMat4Array * self, void * closure){
         res->val[i] = glm::determinant(self->val[i]);
     }
     return (PyObject *)res;
-    return res; 
 }
 
 PyObject * GLMMat4Array_tp_get_inv(GLMMat4Array * self, void * closure){

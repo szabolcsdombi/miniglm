@@ -19,7 +19,7 @@ class TestCase(MyTestCase):
     def test_3(self):
         a = QuatArray((1.0, 1.0, 1.0, 1.0) * 1000)
         b = QuatArray((.5, .2, .1, 1) * 1000)
-        self.assertAlmostEqual1(a.length, (2.0, ) * 1000)
+        self.assertAlmostEqual2(a.length, (2.0, ) * 1000)
         self.assertAlmostEqual2(a.normal, (0.5, 0.5, 0.5, 0.5) * 1000)
         self.assertAlmostEqual2(a.conj, (-1.0, -1.0, -1.0, 1.0) * 1000)
         self.assertAlmostEqual2(a.normal.inv, (-0.5, -0.5, -0.5, 0.5) * 1000)

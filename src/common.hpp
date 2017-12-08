@@ -82,6 +82,11 @@ struct GLMMat4Array {
 	int size;
 };
 
+struct GLMFloatArray{
+	PyObject_HEAD
+	float * val;
+	int size;
+};
 
 extern PyTypeObject GLMVec2_Type;
 extern PyTypeObject GLMVec3_Type;
@@ -103,6 +108,8 @@ extern PyTypeObject GLMMat4Array_Type;
 
 extern PyTypeObject GLMQuatArray_Type;
 
+extern PyTypeObject GLMFloatArray_Type; 
+
 PyObject * GLMVec2_tp_new(PyTypeObject * type, PyObject * args, PyObject * kwargs);
 PyObject * GLMVec3_tp_new(PyTypeObject * type, PyObject * args, PyObject * kwargs);
 PyObject * GLMVec4_tp_new(PyTypeObject * type, PyObject * args, PyObject * kwargs);
@@ -119,9 +126,11 @@ PyObject * GLMVec4Array_tp_new(PyTypeObject * type, PyObject * args, PyObject * 
 
 PyObject * GLMMat2Array_tp_new(PyTypeObject * type, PyObject * args, PyObject * kwargs);
 PyObject * GLMMat3Array_tp_new(PyTypeObject * type, PyObject * args, PyObject * kwargs);
-PyObject * GLMMat4Arra4_tp_new(PyTypeObject * type, PyObject * args, PyObject * kwargs);
+PyObject * GLMMat4Array_tp_new(PyTypeObject * type, PyObject * args, PyObject * kwargs);
 
 PyObject * GLMQuatArray_tp_new(PyTypeObject * type, PyObject * args, PyObject * kwargs);
+
+PyObject * GLMFloatArray_tp_new(PyTypeObject * type, PyObject * args, PyObject * kwargs);
 
 PyObject * GLMVec2_Tuple(GLMVec2 * self);
 PyObject * GLMVec3_Tuple(GLMVec3 * self);
@@ -142,6 +151,8 @@ PyObject * GLMMat3Array_Tuple(GLMMat3Array * self);
 PyObject * GLMMat4Array_Tuple(GLMMat4Array * self);
 
 PyObject * GLMQuatArray_Tuple(GLMQuatArray * self);
+
+PyObject * GLMFloatArray_Tuple(GLMFloatArray * self);
 
 glm::vec2 vec2_from_iterable(PyObject * iterable);
 glm::vec3 vec3_from_iterable(PyObject * iterable);

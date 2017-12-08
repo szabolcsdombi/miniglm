@@ -176,7 +176,17 @@ PyObject * Initialize(PyObject * module) {
 
 		PyModule_AddObject(module, "QuatArray", (PyObject *)&GLMQuatArray_Type);
 	}
+	
+	{
+		if (PyType_Ready(&GLMFloatArray_Type) < 0) {
+			PyErr_Format(PyExc_ImportError, "Cannot register FloatArray in %s (%s:%d)", __FUNCTION__, __FILE__, __LINE__);
+			return 0;
+		}
 
+		Py_INCREF(&GLMFloatArray_Type);
+
+		PyModule_AddObject(module, "FloatArray", (PyObject *)&GLMFloatArray_Type);
+	}
 
 	return module;
 }

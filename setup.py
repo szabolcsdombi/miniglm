@@ -17,6 +17,7 @@ glm = Extension(
         'src/matrix4_array.cpp',
         'src/quaternion.cpp',
         'src/quaternion_array.cpp',
+        'src/float_array.cpp',
         'src/module.cpp',
         'src/others.cpp',
         'src/tools.cpp',

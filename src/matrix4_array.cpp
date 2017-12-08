@@ -530,11 +530,14 @@ PyObject * GLMMat4Array_tp_get_trans(GLMMat4Array * self, void * closure){
 
 PyObject * GLMMat4Array_tp_get_det(GLMMat4Array * self, void * closure){
     int size = self->size;
-    PyObject * res = PyTuple_New(size);
+    GLMFloatArray * res = (GLMFloatArray *)GLMFloatArray_tp_new(&GLMFloatArray_Type, 0, 0);
+    res->size = size;
+    res->val = new float[size + 1];
 
     for(int i = 0; i < size; ++i){
-        PyTuple_SET_ITEM(res, i, PyFloat_FromDouble(glm::determinant(self->val[i])));
+        res->val[i] = glm::determinant(self->val[i]);
     }
+    return (PyObject *)res;
     return res; 
 }
 

@@ -377,19 +377,29 @@ PyBufferProcs GLMQuatArray_tp_as_buffer = {
 };
 
 PyObject * GLMQuatArray_tp_meth_dot(GLMQuatArray * lhs, PyObject * args){
-    PyObject * rhs = PyTuple_GetItem(args, 0);
+    PyObject * rhs;
+
+    int arg_ok = PyArg_ParseTuple(args, "O", &rhs);
+
+    if(!arg_ok){
+        return 0;
+    }
+
     if(Py_TYPE(rhs) == &GLMQuatArray_Type){
         if(lhs->size != ((GLMQuatArray *)rhs)->size){
             PyErr_Format(PyExc_Exception, "different sizes");
             return (PyObject *)0;
         }
         int size = lhs->size;
-        PyObject * res = PyTuple_New(size);
+        
+        GLMFloatArray * res = (GLMFloatArray *)GLMFloatArray_tp_new(&GLMFloatArray_Type, 0, 0);
+		res->size = size;
+		res->val = new float[res->size + 1];
+		for (int i = 0; i < size; ++i) {
+			res->val[i] = glm::dot(((GLMQuatArray *)lhs)->val[i], ((GLMQuatArray *)rhs)->val[i]);
+		}
 
-        for(int i = 0; i < size; ++i){
-            PyTuple_SetItem(res, i, PyFloat_FromDouble(glm::dot(((GLMQuatArray *)lhs)->val[i], ((GLMQuatArray *)rhs)->val[i])));
-        }
-        return res;
+		return (PyObject *)res;
     }
 
     PyErr_Clear();
@@ -397,7 +407,14 @@ PyObject * GLMQuatArray_tp_meth_dot(GLMQuatArray * lhs, PyObject * args){
 }
 
 PyObject * GLMQuatArray_tp_meth_cross(GLMQuatArray * lhs, PyObject * args){
-    PyObject * rhs = PyTuple_GetItem(args, 0);
+    PyObject * rhs;
+
+    int arg_ok = PyArg_ParseTuple(args, "O", &rhs);
+
+    if(!arg_ok){
+        return 0;
+    }
+
     if(Py_TYPE(rhs) == &GLMQuatArray_Type){
         if(lhs->size != ((GLMQuatArray *)rhs)->size){
             PyErr_Format(PyExc_Exception, "different sizes");
@@ -419,8 +436,15 @@ PyObject * GLMQuatArray_tp_meth_cross(GLMQuatArray * lhs, PyObject * args){
 }
 
 PyObject * GLMQuatArray_tp_meth_lerp(GLMQuatArray * lhs, PyObject * args){
-    PyObject * rhs = PyTuple_GetItem(args, 0);
-    float coef = (float)PyFloat_AsDouble(PyTuple_GetItem(args, 1));
+    PyObject * rhs, * c;
+
+    int arg_ok = PyArg_ParseTuple(args, "OO", &rhs, &c);
+
+    if(!arg_ok){
+        return 0;
+    }
+
+    float coef = (float)PyFloat_AsDouble(c);
     if(PyErr_Occurred()){
         return (PyObject *)0;
     }
@@ -445,8 +469,15 @@ PyObject * GLMQuatArray_tp_meth_lerp(GLMQuatArray * lhs, PyObject * args){
 }
 
 PyObject * GLMQuatArray_tp_meth_slerp(GLMQuatArray * lhs, PyObject * args){
-    PyObject * rhs = PyTuple_GetItem(args, 0);
-    float coef = (float)PyFloat_AsDouble(PyTuple_GetItem(args, 1));
+    PyObject * rhs, * c;
+
+    int arg_ok = PyArg_ParseTuple(args, "OO", &rhs, &c);
+
+    if(!arg_ok){
+        return 0;
+    }
+
+    float coef = (float)PyFloat_AsDouble(c);
     if(PyErr_Occurred()){
         return (PyObject *)0;
     }
@@ -505,15 +536,14 @@ PyObject * GLMQuatArray_tp_get_inv(GLMQuatArray * self, void * closure){
     return (PyObject *)res;    
 }
 
-PyObject * GLMQuatArray_tp_get_length(GLMQuatArray * self, void * closure){
-    int size = self->size;
-    PyObject * res = PyTuple_New(size);
-
-    for(int i = 0; i < size; ++i){
-        PyTuple_SetItem(res, i, PyFloat_FromDouble(glm::length(self->val[i])));
-    }
-
-    return res;    
+PyObject * GLMQuatArray_tp_get_length(GLMQuatArray * self, void * closure){   
+    GLMFloatArray * res = (GLMFloatArray *)GLMFloatArray_tp_new(&GLMFloatArray_Type, 0, 0);
+	res->size = self->size;
+	res->val = new float[res->size + 1];
+	for (int i = 0; i < self->size; ++i) {
+		res->val[i] = glm::length(self->val[i]);
+	}
+	return (PyObject *)res;
 }
 
 PyObject * GLMQuatArray_tp_get_normal(GLMQuatArray * self, void * closure){
@@ -545,13 +575,15 @@ PyObject * GLMQuatArray_tp_get_axis(GLMQuatArray * self, void * closure){
 
 PyObject * GLMQuatArray_tp_get_angle(GLMQuatArray * self, void * closure){
     int size = self->size;
-    PyObject * res = PyTuple_New(size);
+    GLMFloatArray * res = (GLMFloatArray *)GLMFloatArray_tp_new(&GLMFloatArray_Type, 0, 0);
+    res->size = size;
+    res->val = new float[size + 1];
     
     for(int i = 0; i < size; ++i){
-        PyTuple_SetItem(res, i, PyFloat_FromDouble(2.0 * acos(self->val[i].w)));
+        res->val[i] = 2.0 * acos(self->val[i].w);
     }
 
-    return res;
+    return (PyObject *)res;
 }
 
 PyObject * GLMQuatArray_tp_get_tup(GLMQuatArray * self, void * closure){

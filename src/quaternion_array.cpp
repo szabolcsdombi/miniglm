@@ -435,7 +435,7 @@ PyObject * GLMQuatArray_tp_meth_cross(GLMQuatArray * lhs, PyObject * args){
     Py_RETURN_NOTIMPLEMENTED;
 }
 
-PyObject * GLMQuatArray_tp_meth_lerp(GLMQuatArray * lhs, PyObject * args){
+PyObject * GLMQuatArray_tp_meth_lerp(GLMQuatArray * lhs, PyObject * args) {
     PyObject * rhs, * c;
 
     int arg_ok = PyArg_ParseTuple(args, "OO", &rhs, &c);

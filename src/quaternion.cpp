@@ -272,7 +272,14 @@ PyBufferProcs GLMQuat_tp_as_buffer = {
 };
 
 PyObject * GLMQuat_tp_meth_dot(GLMQuat * lhs, PyObject * args) {
-	PyObject * rhs = PyTuple_GetItem(args, 0);
+	PyObject * rhs;
+	
+	int arg_ok = PyArg_ParseTuple(args, "O", &rhs);
+
+	if(!arg_ok){
+		PyErr_Format(PyExc_Exception, "Missing parameter!");
+		return 0;
+	}
 	if (Py_TYPE(rhs) == &GLMQuat_Type) {
 		return PyFloat_FromDouble(glm::dot(lhs->val, ((GLMQuat *)rhs)->val));
 	}
@@ -280,7 +287,14 @@ PyObject * GLMQuat_tp_meth_dot(GLMQuat * lhs, PyObject * args) {
 }
 
 PyObject * GLMQuat_tp_meth_cross(GLMQuat * lhs, PyObject * args) {
-	PyObject * rhs = PyTuple_GetItem(args, 0);
+	PyObject * rhs;
+	
+	int arg_ok = PyArg_ParseTuple(args, "O", &rhs);
+
+	if(!arg_ok){
+		PyErr_Format(PyExc_Exception, "Missing parameter!");
+		return 0;
+	}
 	if (Py_TYPE(rhs) == &GLMQuat_Type) {
 		GLMQuat * res = (GLMQuat *)GLMQuat_tp_new(&GLMQuat_Type, 0, 0);
 		res->val = glm::cross(lhs->val, ((GLMQuat *)rhs)->val);
@@ -290,8 +304,14 @@ PyObject * GLMQuat_tp_meth_cross(GLMQuat * lhs, PyObject * args) {
 }
 
 PyObject * GLMQuat_tp_meth_slerp(GLMQuat * lhs, PyObject * args) {
-	PyObject * rhs = PyTuple_GetItem(args, 0);
-	float coef = (float)PyFloat_AsDouble(PyTuple_GetItem(args, 1));
+	PyObject * rhs, * py_coeff;
+	
+	int arg_ok = PyArg_ParseTuple(args, "OO", &rhs, &py_coeff);
+
+	if(!arg_ok){
+		return 0;
+	}
+	float coef = (float)PyFloat_AsDouble(py_coeff);
 	if (PyErr_Occurred()) {
 		return 0;
 	}
@@ -304,7 +324,14 @@ PyObject * GLMQuat_tp_meth_slerp(GLMQuat * lhs, PyObject * args) {
 }
 
 PyObject * GLMQuat_tp_meth_lerp(GLMQuat * lhs, PyObject * args) {
-	PyObject * rhs = PyTuple_GetItem(args, 0);
+	PyObject * rhs, * py_coeff;
+	
+	int arg_ok = PyArg_ParseTuple(args, "OO", &rhs, &py_coeff);
+
+	if(!arg_ok){
+		return 0;
+	}
+	
 	float coef = (float)PyFloat_AsDouble(PyTuple_GetItem(args, 1));
 	if (PyErr_Occurred()) {
 		return 0;

@@ -19,7 +19,7 @@ if os.environ.get('READTHEDOCS') == 'True' or sys.argv[0] == 'completion.py':
 else:
     from .glm import (
         Vec2, Vec3, Vec4, Mat2, Mat3, Mat4, Quat,
-        Vec2Array,
+        Vec2Array, Vec3Array, Vec4Array, Mat2Array, Mat3Array, Mat4Array, QuatArray, FloatArray,
         mat4_perspective, mat4_ortho, mat4_look_at,
     )
 
@@ -34,7 +34,7 @@ else:
 
 __all__ = [
     'Vec2', 'Vec3', 'Vec4', 'Mat2', 'Mat3', 'Mat4', 'Quat',
-    'Vec2Array',
+    'Vec2Array', 'Vec3Array', 'Vec4Array', 'Mat2Array', 'Mat3Array', 'Mat4Array', 'QuatArray', 'FloatArray',
     'mat4_perspective', 'mat4_ortho', 'mat4_look_at',
     'radians', 'degrees',
 ]

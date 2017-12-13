@@ -17,7 +17,13 @@ void GLMVec2Array_tp_dealloc(GLMVec2Array * self) {
 }
 
 int GLMVec2Array_tp_init(GLMVec2Array * self, PyObject * args, PyObject * kwargs) {
-	PyObject * iterable = PyTuple_GetItem(args, 0);
+	PyObject * iterable;
+
+    int arg_ok = PyArg_ParseTuple(args, "O", &iterable);
+
+    if(!arg_ok){
+        return -1;
+    }
 
 	if (Py_TYPE(iterable) == &PyTuple_Type && PyTuple_GET_SIZE(iterable) % N == 0) {
 		int size = PyTuple_GET_SIZE(iterable) / N;
@@ -376,7 +382,7 @@ PyNumberMethods GLMVec2Array_tp_as_number = {
 };
 
 Py_ssize_t GLMVec2Array_sq_length(GLMVec2Array * self) {
-	return N;
+	return N * self->size;
 }
 
 PyObject * GLMVec2Array_sq_item(GLMVec2Array * self, Py_ssize_t key) {
@@ -414,8 +420,8 @@ PySequenceMethods GLMVec2Array_tp_as_sequence = {
 };
 
 int GLMVec2Array_bf_getbuffer(GLMVec2Array * self, Py_buffer * view, int flags) {
-	view->buf = (void *)&self->val;
-	view->len = sizeof(self->val);
+	view->buf = (void *)self->val;
+	view->len = sizeof(self->val[0]) * self->size;
 	view->itemsize = 1;
 
 	view->format = 0;
@@ -435,7 +441,14 @@ PyBufferProcs GLMVec2Array_tp_as_buffer = {
 };
 
 PyObject * GLMVec2Array_tp_meth_dot(GLMVec2Array * lhs, PyObject * args) {
-	PyObject * rhs = PyTuple_GetItem(args, 0);
+	PyObject * rhs;
+	int arg_ok = PyArg_ParseTuple(args, "O", &rhs);
+
+	if(!arg_ok){
+		PyErr_Format(PyExc_Exception, "Missing parameter!");
+		return 0;
+	}
+
 	if (Py_TYPE(rhs) == &GLMVec2Array_Type) {
 		int lhs_size = ((GLMVec2Array *)lhs)->size;
 		int rhs_size = ((GLMVec2Array *)rhs)->size;
@@ -445,33 +458,82 @@ PyObject * GLMVec2Array_tp_meth_dot(GLMVec2Array * lhs, PyObject * args) {
 		}
 		glm::vec2 * lhs_val = ((GLMVec2Array *)lhs)->val;
 		glm::vec2 * rhs_val = ((GLMVec2Array *)rhs)->val;
-		PyObject * res = PyTuple_New(lhs_size);
+		
+		GLMFloatArray * res = (GLMFloatArray *)GLMFloatArray_tp_new(&GLMFloatArray_Type, 0, 0);
+		res->size = lhs_size;
+		res->val = new float[res->size + 1];
 		for (int i = 0; i < lhs_size; ++i) {
-			PyTuple_SET_ITEM(res, i, PyFloat_FromDouble(glm::dot(lhs_val[i], rhs_val[i])));
+			res->val[i] = glm::dot(lhs_val[i], rhs_val[i]);
 		}
-		return res;
+		return (PyObject *)res;
 	}
+	return 0;
+}
+
+PyObject * GLMVec2Array_tp_meth_out(GLMVec2Array * lhs, PyObject * args){
+	PyObject * rhs;
+	int arg_ok = PyArg_ParseTuple(args, "O", &rhs);
+
+	if(!arg_ok){
+		PyErr_Format(PyExc_Exception, "Missing parameters!");
+		return 0;
+	}
+
+	if(Py_TYPE(rhs) == &GLMVec2Array_Type){
+		
+		if(((GLMVec2Array *)lhs)->size != ((GLMVec2Array *)rhs)->size){
+			PyErr_Format(PyExc_Exception, "different sizes");
+			return 0;
+		}
+		
+		int size = ((GLMVec2Array *)lhs)->size;
+		
+		glm::vec2 * lhs_val = ((GLMVec2Array *)lhs)->val;
+		glm::vec2 * rhs_val = ((GLMVec2Array *)rhs)->val;
+		
+		GLMMat2Array * res = (GLMMat2Array *)GLMMat2Array_tp_new(&GLMMat2Array_Type, 0, 0);
+		res->size = size;
+		res->val = new glm::mat2[size];
+
+		for(int i = 0; i < size; ++i){
+			res->val[i][0][0] = lhs_val[i][0] * rhs_val[i][0];
+			res->val[i][0][1] = lhs_val[i][0] * rhs_val[i][1];
+			res->val[i][1][0] = lhs_val[i][1] * rhs_val[i][0];
+			res->val[i][1][1] = lhs_val[i][1] * rhs_val[i][1];
+		}
+
+		return (PyObject *)res;
+
+	}
+
 	return 0;
 }
 
 PyMethodDef GLMVec2Array_tp_methods[] = {
 	{"dot", (PyCFunction)GLMVec2Array_tp_meth_dot, METH_VARARGS, 0},
+	{"out", (PyCFunction)GLMVec2Array_tp_meth_out, METH_VARARGS, 0},
 	{0},
 };
 
 PyObject * GLMVec2Array_tp_get_length(GLMVec2Array * self, void * closure) {
 	int size = ((GLMVec2Array *)self)->size;
 	glm::vec2 * val = ((GLMVec2Array *)self)->val;
-	PyObject * res = PyTuple_New(size);
-	for (int i = 0; i < size; ++i) {
-		PyTuple_SET_ITEM(res, i, PyFloat_FromDouble(glm::length(val[i])));
+	GLMFloatArray * res = (GLMFloatArray *)GLMFloatArray_tp_new(&GLMFloatArray_Type, 0, 0);
+	res->size = self->size;
+	res->val = new float[res->size + 1];
+	for (int i = 0; i < self->size; ++i) {
+		res->val[i] = glm::length(self->val[i]);
 	}
-	return res;
+	return (PyObject *)res;
 }
 
 PyObject * GLMVec2Array_tp_get_normal(GLMVec2Array * self, void * closure) {
 	GLMVec2Array * res = (GLMVec2Array *)GLMVec2Array_tp_new(&GLMVec2Array_Type, 0, 0);
+	
 	int size = ((GLMVec2Array *)self)->size;
+	res->size = size;
+	res->val = new glm::vec2[res->size + 1];
+	
 	glm::vec2 * val = ((GLMVec2Array *)self)->val;
 	for (int i = 0; i < size; ++i) {
 		res->val[i] = glm::normalize(val[i]);

@@ -25,6 +25,11 @@ class TestCase(MyTestCase):
         self.assertAlmostEqual2(a.normal, (0.26726123690605164, 0.5345224738121033, 0.8017836809158325))
         self.assertAlmostEqual2(a.length, (3.7416574954986572, ))
         self.assertAlmostEqual2(a.normal.length, (1.0, ))
+    
+    def test_4(self):
+        a = Vec3Array((1.0, 2.0, 3.0) * 1000)
+        b = Vec3Array((1.0, 1.0, 1.0) * 1000)
+        self.assertAlmostEqual2(a.out(b), (1.0, 1.0, 1.0, 2.0, 2.0, 2.0, 3.0, 3.0, 3.0) * 1000)
 
 
 if __name__ == '__main__':

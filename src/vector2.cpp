@@ -345,8 +345,37 @@ PyObject * GLMVec2_tp_meth_refract(GLMVec2 * self, PyObject * args) {
 	return 0;
 }
 
+
+PyObject * GLMVec2_tp_meth_out(GLMVec2 * lhs, PyObject * args){
+	PyObject * rhs;
+	int arg_ok = PyArg_ParseTuple(args, "O", &rhs);
+
+	if(!arg_ok){
+		PyErr_Format(PyExc_Exception, "Missing parameters!");
+		return 0;
+	}
+
+	if(Py_TYPE(rhs) == &GLMVec2_Type){
+		
+		GLMMat2 * res = (GLMMat2 *)GLMMat2_tp_new(&GLMMat2_Type, 0, 0);
+
+		res->val[0][0] = ((GLMVec2 *)lhs)->val[0] * ((GLMVec2 *)rhs)->val[0];
+		res->val[0][1] = ((GLMVec2 *)lhs)->val[0] * ((GLMVec2 *)rhs)->val[1];
+		res->val[1][0] = ((GLMVec2 *)lhs)->val[1] * ((GLMVec2 *)rhs)->val[0];
+		res->val[1][1] = ((GLMVec2 *)lhs)->val[1] * ((GLMVec2 *)rhs)->val[1];
+	
+
+		return (PyObject *)res;
+
+	}
+
+	return 0;
+}
+
+
 PyMethodDef GLMVec2_tp_methods[] = {
 	{"dot", (PyCFunction)GLMVec2_tp_meth_dot, METH_VARARGS, 0},
+	{"out", (PyCFunction)GLMVec2_tp_meth_out, METH_VARARGS, 0},
 	{"reflect", (PyCFunction)GLMVec2_tp_meth_reflect, METH_VARARGS, 0},
 	{"refract", (PyCFunction)GLMVec2_tp_meth_refract, METH_VARARGS, 0},
 	{0},

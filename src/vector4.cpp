@@ -348,8 +348,49 @@ PyObject * GLMVec4_tp_meth_refract(GLMVec4 * self, PyObject * args) {
 	return 0;
 }
 
+PyObject * GLMVec4_tp_meth_out(GLMVec4 * lhs, PyObject * args){
+	PyObject * rhs;
+	int arg_ok = PyArg_ParseTuple(args, "O", &rhs);
+
+	if(!arg_ok){
+		PyErr_Format(PyExc_Exception, "Missing parameters!");
+		return 0;
+	}
+
+	if(Py_TYPE(rhs) == &GLMVec4_Type){
+		
+		GLMMat4 * res = (GLMMat4 *)GLMMat4_tp_new(&GLMMat4_Type, 0, 0);
+
+		res->val[0][0] = ((GLMVec4 *)lhs)->val[0] * ((GLMVec4 *)rhs)->val[0];
+		res->val[0][1] = ((GLMVec4 *)lhs)->val[0] * ((GLMVec4 *)rhs)->val[1];
+		res->val[0][2] = ((GLMVec4 *)lhs)->val[0] * ((GLMVec4 *)rhs)->val[2];
+		res->val[0][3] = ((GLMVec4 *)lhs)->val[0] * ((GLMVec4 *)rhs)->val[3];
+		
+		res->val[1][0] = ((GLMVec4 *)lhs)->val[1] * ((GLMVec4 *)rhs)->val[0];
+		res->val[1][1] = ((GLMVec4 *)lhs)->val[1] * ((GLMVec4 *)rhs)->val[1];
+		res->val[1][2] = ((GLMVec4 *)lhs)->val[1] * ((GLMVec4 *)rhs)->val[2];
+		res->val[1][3] = ((GLMVec4 *)lhs)->val[1] * ((GLMVec4 *)rhs)->val[3];
+		
+		res->val[2][0] = ((GLMVec4 *)lhs)->val[2] * ((GLMVec4 *)rhs)->val[0];
+		res->val[2][1] = ((GLMVec4 *)lhs)->val[2] * ((GLMVec4 *)rhs)->val[1];
+		res->val[2][2] = ((GLMVec4 *)lhs)->val[2] * ((GLMVec4 *)rhs)->val[2];
+		res->val[2][3] = ((GLMVec4 *)lhs)->val[2] * ((GLMVec4 *)rhs)->val[3];
+		
+		res->val[3][0] = ((GLMVec4 *)lhs)->val[3] * ((GLMVec4 *)rhs)->val[0];
+		res->val[3][1] = ((GLMVec4 *)lhs)->val[3] * ((GLMVec4 *)rhs)->val[1];
+		res->val[3][2] = ((GLMVec4 *)lhs)->val[3] * ((GLMVec4 *)rhs)->val[2];
+		res->val[3][3] = ((GLMVec4 *)lhs)->val[3] * ((GLMVec4 *)rhs)->val[3];
+		
+		return (PyObject *)res;
+
+	}
+
+	return 0;
+}
+
 PyMethodDef GLMVec4_tp_methods[] = {
 	{"dot", (PyCFunction)GLMVec4_tp_meth_dot, METH_VARARGS, 0},
+	{"out", (PyCFunction)GLMVec4_tp_meth_out, METH_VARARGS, 0},
 	{"reflect", (PyCFunction)GLMVec4_tp_meth_reflect, METH_VARARGS, 0},
 	{"refract", (PyCFunction)GLMVec4_tp_meth_refract, METH_VARARGS, 0},
 	{0},

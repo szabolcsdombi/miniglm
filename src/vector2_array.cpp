@@ -470,8 +470,48 @@ PyObject * GLMVec2Array_tp_meth_dot(GLMVec2Array * lhs, PyObject * args) {
 	return 0;
 }
 
+PyObject * GLMVec2Array_tp_meth_out(GLMVec2Array * lhs, PyObject * args){
+	PyObject * rhs;
+	int arg_ok = PyArg_ParseTuple(args, "O", &rhs);
+
+	if(!arg_ok){
+		PyErr_Format(PyExc_Exception, "Missing parameters!");
+		return 0;
+	}
+
+	if(Py_TYPE(rhs) == &GLMVec2Array_Type){
+		
+		if(((GLMVec2Array *)lhs)->size != ((GLMVec2Array *)rhs)->size){
+			PyErr_Format(PyExc_Exception, "different sizes");
+			return 0;
+		}
+		
+		int size = ((GLMVec2Array *)lhs)->size;
+		
+		glm::vec2 * lhs_val = ((GLMVec2Array *)lhs)->val;
+		glm::vec2 * rhs_val = ((GLMVec2Array *)rhs)->val;
+		
+		GLMMat2Array * res = (GLMMat2Array *)GLMMat2Array_tp_new(&GLMMat2Array_Type, 0, 0);
+		res->size = size;
+		res->val = new glm::mat2[size];
+
+		for(int i = 0; i < size; ++i){
+			res->val[i][0][0] = lhs_val[i][0] * rhs_val[i][0];
+			res->val[i][0][1] = lhs_val[i][0] * rhs_val[i][1];
+			res->val[i][1][0] = lhs_val[i][1] * rhs_val[i][0];
+			res->val[i][1][1] = lhs_val[i][1] * rhs_val[i][1];
+		}
+
+		return (PyObject *)res;
+
+	}
+
+	return 0;
+}
+
 PyMethodDef GLMVec2Array_tp_methods[] = {
 	{"dot", (PyCFunction)GLMVec2Array_tp_meth_dot, METH_VARARGS, 0},
+	{"out", (PyCFunction)GLMVec2Array_tp_meth_out, METH_VARARGS, 0},
 	{0},
 };
 

@@ -26,6 +26,10 @@ class TestCase(MyTestCase):
         self.assertAlmostEqual2(a.length, (2.2360680103302, ) * 1000)
         self.assertAlmostEqual2(a.normal.length, (1.0, ) * 1000)
 
-
+    def test_4(self):
+        a = Vec2Array((1, 2) * 1000)
+        b = Vec2Array((1, 1) * 1000)
+        self.assertAlmostEqual2(a.out(b), (1.0, 1.0, 2.0, 2.0) * 1000)
+ 
 if __name__ == '__main__':
     unittest.main()

@@ -563,10 +563,70 @@ PyObject * GLMVec4Array_tp_get_tup(GLMVec4Array * self, void * closure) {
 	return GLMVec4Array_Tuple(self);
 }
 
+PyObject * GLMVec4Array_tp_get_x(GLMVec4Array * self, void * closure) {
+	int size = self->size;
+	
+	GLMFloatArray * res = (GLMFloatArray *)GLMFloatArray_tp_new(&GLMFloatArray_Type, 0, 0);
+	res->size = size;
+	res->val = new float[size];
+	
+	for(int i = 0; i < size; ++i){
+		res->val[i] = self->val[i].x;
+	}
+
+	return (PyObject *)res;
+}
+
+PyObject * GLMVec4Array_tp_get_y(GLMVec4Array * self, void * closure) {
+	int size = self->size;
+	
+	GLMFloatArray * res = (GLMFloatArray *)GLMFloatArray_tp_new(&GLMFloatArray_Type, 0, 0);
+	res->size = size;
+	res->val = new float[size];
+	
+	for(int i = 0; i < size; ++i){
+		res->val[i] = self->val[i].y;
+	}
+
+	return (PyObject *)res;
+}
+
+PyObject * GLMVec4Array_tp_get_z(GLMVec4Array * self, void * closure) {
+	int size = self->size;
+	
+	GLMFloatArray * res = (GLMFloatArray *)GLMFloatArray_tp_new(&GLMFloatArray_Type, 0, 0);
+	res->size = size;
+	res->val = new float[size];
+	
+	for(int i = 0; i < size; ++i){
+		res->val[i] = self->val[i].z;
+	}
+
+	return (PyObject *)res;
+}
+
+PyObject * GLMVec4Array_tp_get_w(GLMVec4Array * self, void * closure) {
+	int size = self->size;
+	
+	GLMFloatArray * res = (GLMFloatArray *)GLMFloatArray_tp_new(&GLMFloatArray_Type, 0, 0);
+	res->size = size;
+	res->val = new float[size];
+	
+	for(int i = 0; i < size; ++i){
+		res->val[i] = self->val[i].w;
+	}
+
+	return (PyObject *)res;
+}
+
 PyGetSetDef GLMVec4Array_tp_getseters[] = {
 	{(char *)"length", (getter)GLMVec4Array_tp_get_length, 0, 0, 0},
 	{(char *)"normal", (getter)GLMVec4Array_tp_get_normal, 0, 0, 0},
 	{(char *)"tup", (getter)GLMVec4Array_tp_get_tup, 0, 0, 0},
+	{(char *)"x", (getter)GLMVec4Array_tp_get_x, 0, 0, 0},
+	{(char *)"y", (getter)GLMVec4Array_tp_get_y, 0, 0, 0},
+	{(char *)"z", (getter)GLMVec4Array_tp_get_z, 0, 0, 0},
+	{(char *)"w", (getter)GLMVec4Array_tp_get_w, 0, 0, 0},
 	{0},
 };
 

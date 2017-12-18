@@ -545,10 +545,40 @@ PyObject * GLMVec2Array_tp_get_tup(GLMVec2Array * self, void * closure) {
 	return GLMVec2Array_Tuple(self);
 }
 
+PyObject * GLMVec2Array_tp_get_x(GLMVec2Array * self, void * closure) {
+	int size = self->size;
+	
+	GLMFloatArray * res = (GLMFloatArray *)GLMFloatArray_tp_new(&GLMFloatArray_Type, 0, 0);
+	res->size = size;
+	res->val = new float[size];
+	
+	for(int i = 0; i < size; ++i){
+		res->val[i] = self->val[i].x;
+	}
+
+	return (PyObject *)res;
+}
+
+PyObject * GLMVec2Array_tp_get_y(GLMVec2Array * self, void * closure) {
+	int size = self->size;
+	
+	GLMFloatArray * res = (GLMFloatArray *)GLMFloatArray_tp_new(&GLMFloatArray_Type, 0, 0);
+	res->size = size;
+	res->val = new float[size];
+	
+	for(int i = 0; i < size; ++i){
+		res->val[i] = self->val[i].y;
+	}
+
+	return (PyObject *)res;
+}
+
 PyGetSetDef GLMVec2Array_tp_getseters[] = {
 	{(char *)"length", (getter)GLMVec2Array_tp_get_length, 0, 0, 0},
 	{(char *)"normal", (getter)GLMVec2Array_tp_get_normal, 0, 0, 0},
 	{(char *)"tup", (getter)GLMVec2Array_tp_get_tup, 0, 0, 0},
+	{(char *)"x", (getter)GLMVec2Array_tp_get_x, 0, 0, 0},
+	{(char *)"y", (getter)GLMVec2Array_tp_get_y, 0, 0, 0},
 	{0},
 };
 

@@ -1,5 +1,6 @@
 #include <Python.h>
 #include <glm/glm.hpp>
+#include <glm/gtc/quaternion.hpp>
 
 PyObject * mymodule_meth_add(PyObject * self, PyObject * args) {
     glm::dvec3 a, b;
@@ -8,6 +9,24 @@ PyObject * mymodule_meth_add(PyObject * self, PyObject * args) {
     }
     glm::dvec3 c = a + b;
     return Py_BuildValue("ddd", c.x, c.y, c.z);
+}
+
+PyObject * mymodule_meth_quat2mat(PyObject * self, PyObject * args) {
+    glm::dquat q;
+    if (!PyArg_ParseTuple(args, "(dddd)", &q.x, &q.y, &q.z, &q.w)) {
+        return NULL;
+    }
+    glm::dmat3 m = glm::dmat3(q);
+    return Py_BuildValue("ddddddddd", m[0].x, m[0].y, m[0].z, m[1].x, m[1].y, m[1].z, m[2].x, m[2].y, m[2].z);
+}
+
+PyObject * mymodule_meth_mat2quat(PyObject * self, PyObject * args) {
+    glm::dmat3 m;
+    if (!PyArg_ParseTuple(args, "(ddddddddd)", &m[0].x, &m[0].y, &m[0].z, &m[1].x, &m[1].y, &m[1].z, &m[2].x, &m[2].y, &m[2].z)) {
+        return NULL;
+    }
+    glm::dquat q = glm::dquat(m);
+    return Py_BuildValue("dddd", q.x, q.y, q.z, q.w);
 }
 
 PyMethodDef module_methods[] = {

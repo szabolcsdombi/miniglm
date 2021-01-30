@@ -45,7 +45,7 @@ int converter(PyObject * obj, Operand * operand) {
         operand->q.x = PyFloat_AsDouble(PyTuple_GET_ITEM(obj, 0));
         operand->q.y = PyFloat_AsDouble(PyTuple_GET_ITEM(obj, 1));
         operand->q.z = PyFloat_AsDouble(PyTuple_GET_ITEM(obj, 2));
-        operand->q.w = PyFloat_AsDouble(PyTuple_GET_ITEM(obj, 4));
+        operand->q.w = PyFloat_AsDouble(PyTuple_GET_ITEM(obj, 3));
         return 1;
     }
     if (PyTuple_Size(obj) == 9) {

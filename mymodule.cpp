@@ -231,17 +231,17 @@ PyObject * mymodule_meth_swizzle(PyObject * self, PyObject * args) {
     }
     if (a.type == VECTOR) {
         return tup({
-            a.v[swizzle[0] - 'x'],
-            a.v[swizzle[1] - 'x'],
-            a.v[swizzle[2] - 'x'],
+            a.v[(swizzle[0] - 'x') & 3],
+            a.v[(swizzle[1] - 'x') & 3],
+            a.v[(swizzle[2] - 'x') & 3],
         });
     }
     if (a.type == QUATERNION) {
         return tup({
-            a.q[swizzle[0] - 'w'],
-            a.q[swizzle[1] - 'w'],
-            a.q[swizzle[2] - 'w'],
-            a.q[swizzle[3] - 'w'],
+            a.q[(swizzle[3] - 'x') & 3],
+            a.q[(swizzle[0] - 'x') & 3],
+            a.q[(swizzle[1] - 'x') & 3],
+            a.q[(swizzle[2] - 'x') & 3],
         });
     }
     return NULL;

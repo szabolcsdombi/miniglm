@@ -178,6 +178,27 @@ PyObject * mymodule_meth_mul(PyObject * self, PyObject * args) {
     return NULL;
 }
 
+PyObject * mymodule_meth_mix(PyObject * self, PyObject * args) {
+    Operand a, b;
+    double s;
+    if (!PyArg_ParseTuple(args, "O&O&d", converter, &a, converter, &b, &s)) {
+        return NULL;
+    }
+    if (a.type == SCALAR && b.type == SCALAR) {
+        return PyFloat_FromDouble(glm::mix(a.s, b.s, s));
+    }
+    if (a.type == VECTOR && b.type == VECTOR) {
+        return tup(glm::mix(a.v, b.v, s));
+    }
+    if (a.type == QUATERNION && b.type == QUATERNION) {
+        return tup(glm::slerp(a.q, b.q, s));
+    }
+    if (a.type == MATRIX && b.type == MATRIX) {
+        return tup(glm::dmat3(glm::slerp(glm::dquat(a.m), glm::dquat(b.m), s)));
+    }
+    return NULL;
+}
+
 PyObject * mymodule_meth_normalize(PyObject * self, PyObject * arg) {
     Operand a;
     if (!converter(arg, &a)) {
@@ -271,6 +292,7 @@ PyMethodDef module_methods[] = {
     {"add", (PyCFunction)mymodule_meth_add, METH_VARARGS, NULL},
     {"sub", (PyCFunction)mymodule_meth_sub, METH_VARARGS, NULL},
     {"mul", (PyCFunction)mymodule_meth_mul, METH_VARARGS, NULL},
+    {"mix", (PyCFunction)mymodule_meth_mix, METH_VARARGS, NULL},
     {"normalize", (PyCFunction)mymodule_meth_normalize, METH_O, NULL},
     {"inverse", (PyCFunction)mymodule_meth_inverse, METH_O, NULL},
     {"cast", (PyCFunction)mymodule_meth_cast, METH_O, NULL},

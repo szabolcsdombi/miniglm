@@ -39,6 +39,16 @@ PyObject * mymodule_meth_normalize(PyObject * self, PyObject * args) {
     return Py_BuildValue("ddd", n.x, n.y, n.z);
 }
 
+PyObject * mymodule_meth_rotate(PyObject * self, PyObject * args) {
+    glm::dvec3 a;
+    glm::dquat q;
+    if (!PyArg_ParseTuple(args, "(ddd)(dddd)", &a.x, &a.y, &a.z, &q.x, &q.y, &q.z, &q.w)) {
+        return NULL;
+    }
+    glm::dvec3 b = q * a;
+    return Py_BuildValue("ddd", b.x, b.y, b.z);
+}
+
 PyObject * mymodule_meth_quat2mat(PyObject * self, PyObject * args) {
     glm::dquat q;
     if (!PyArg_ParseTuple(args, "(dddd)", &q.x, &q.y, &q.z, &q.w)) {

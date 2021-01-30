@@ -118,7 +118,7 @@ PyObject * bytes(const glm::dmat3 & m) {
     return PyBytes_FromStringAndSize((char *)encoded, sizeof(encoded));
 }
 
-PyObject * mymodule_meth_add(PyObject * self, PyObject * args) {
+PyObject * meth_add(PyObject * self, PyObject * args) {
     Operand a, b;
     if (!PyArg_ParseTuple(args, "O&O&", converter, &a, converter, &b)) {
         return NULL;
@@ -132,7 +132,7 @@ PyObject * mymodule_meth_add(PyObject * self, PyObject * args) {
     return NULL;
 }
 
-PyObject * mymodule_meth_sub(PyObject * self, PyObject * args) {
+PyObject * meth_sub(PyObject * self, PyObject * args) {
     Operand a, b;
     if (!PyArg_ParseTuple(args, "O&O&", converter, &a, converter, &b)) {
         return NULL;
@@ -146,7 +146,7 @@ PyObject * mymodule_meth_sub(PyObject * self, PyObject * args) {
     return NULL;
 }
 
-PyObject * mymodule_meth_mul(PyObject * self, PyObject * args) {
+PyObject * meth_mul(PyObject * self, PyObject * args) {
     Operand a, b;
     if (!PyArg_ParseTuple(args, "O&O&", converter, &a, converter, &b)) {
         return NULL;
@@ -178,7 +178,7 @@ PyObject * mymodule_meth_mul(PyObject * self, PyObject * args) {
     return NULL;
 }
 
-PyObject * mymodule_meth_mix(PyObject * self, PyObject * args) {
+PyObject * meth_mix(PyObject * self, PyObject * args) {
     Operand a, b;
     double s;
     if (!PyArg_ParseTuple(args, "O&O&d", converter, &a, converter, &b, &s)) {
@@ -199,7 +199,7 @@ PyObject * mymodule_meth_mix(PyObject * self, PyObject * args) {
     return NULL;
 }
 
-PyObject * mymodule_meth_normalize(PyObject * self, PyObject * arg) {
+PyObject * meth_normalize(PyObject * self, PyObject * arg) {
     Operand a;
     if (!converter(arg, &a)) {
         return NULL;
@@ -216,7 +216,7 @@ PyObject * mymodule_meth_normalize(PyObject * self, PyObject * arg) {
     return NULL;
 }
 
-PyObject * mymodule_meth_inverse(PyObject * self, PyObject * arg) {
+PyObject * meth_inverse(PyObject * self, PyObject * arg) {
     Operand a;
     if (!converter(arg, &a)) {
         return NULL;
@@ -230,7 +230,7 @@ PyObject * mymodule_meth_inverse(PyObject * self, PyObject * arg) {
     return NULL;
 }
 
-PyObject * mymodule_meth_cast(PyObject * self, PyObject * arg) {
+PyObject * meth_cast(PyObject * self, PyObject * arg) {
     Operand a;
     if (!converter(arg, &a)) {
         return NULL;
@@ -244,7 +244,7 @@ PyObject * mymodule_meth_cast(PyObject * self, PyObject * arg) {
     return NULL;
 }
 
-PyObject * mymodule_meth_swizzle(PyObject * self, PyObject * args) {
+PyObject * meth_swizzle(PyObject * self, PyObject * args) {
     Operand a;
     const char * swizzle;
     if (!PyArg_ParseTuple(args, "O&s", converter, &a, &swizzle)) {
@@ -268,7 +268,7 @@ PyObject * mymodule_meth_swizzle(PyObject * self, PyObject * args) {
     return NULL;
 }
 
-PyObject * mymodule_meth_pack(PyObject * self, PyObject * arg) {
+PyObject * meth_pack(PyObject * self, PyObject * arg) {
     Operand a;
     if (!converter(arg, &a)) {
         return NULL;
@@ -289,21 +289,21 @@ PyObject * mymodule_meth_pack(PyObject * self, PyObject * arg) {
 }
 
 PyMethodDef module_methods[] = {
-    {"add", (PyCFunction)mymodule_meth_add, METH_VARARGS, NULL},
-    {"sub", (PyCFunction)mymodule_meth_sub, METH_VARARGS, NULL},
-    {"mul", (PyCFunction)mymodule_meth_mul, METH_VARARGS, NULL},
-    {"mix", (PyCFunction)mymodule_meth_mix, METH_VARARGS, NULL},
-    {"normalize", (PyCFunction)mymodule_meth_normalize, METH_O, NULL},
-    {"inverse", (PyCFunction)mymodule_meth_inverse, METH_O, NULL},
-    {"cast", (PyCFunction)mymodule_meth_cast, METH_O, NULL},
-    {"swizzle", (PyCFunction)mymodule_meth_swizzle, METH_VARARGS, NULL},
-    {"pack", (PyCFunction)mymodule_meth_pack, METH_O, NULL},
+    {"add", (PyCFunction)meth_add, METH_VARARGS, NULL},
+    {"sub", (PyCFunction)meth_sub, METH_VARARGS, NULL},
+    {"mul", (PyCFunction)meth_mul, METH_VARARGS, NULL},
+    {"mix", (PyCFunction)meth_mix, METH_VARARGS, NULL},
+    {"normalize", (PyCFunction)meth_normalize, METH_O, NULL},
+    {"inverse", (PyCFunction)meth_inverse, METH_O, NULL},
+    {"cast", (PyCFunction)meth_cast, METH_O, NULL},
+    {"swizzle", (PyCFunction)meth_swizzle, METH_VARARGS, NULL},
+    {"pack", (PyCFunction)meth_pack, METH_O, NULL},
     {},
 };
 
-PyModuleDef module_def = {PyModuleDef_HEAD_INIT, "mymodule", NULL, -1, module_methods};
+PyModuleDef module_def = {PyModuleDef_HEAD_INIT, "miniglm", NULL, -1, module_methods};
 
-extern "C" PyObject * PyInit_mymodule() {
+extern "C" PyObject * PyInit_miniglm() {
     PyObject * module = PyModule_Create(&module_def);
     return module;
 }

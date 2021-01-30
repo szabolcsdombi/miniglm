@@ -1,16 +1,25 @@
 from setuptools import Extension, setup
 
 ext = Extension(
-    name='mymodule',
-    sources=['./mymodule.cpp'],
+    name='miniglm',
+    sources=['./miniglm.cpp'],
     extra_compile_args=['-fpermissive'],
     include_dirs=['include'],
     library_dirs=[],
     libraries=[],
 )
 
+with open('README.md') as readme:
+    long_description = readme.read()
+
 setup(
-    name='mymodule',
-    version='0.1.0',
+    name='miniglm',
+    version='0.3.0',
     ext_modules=[ext],
+    long_description=long_description,
+    long_description_content_type='text/markdown',
+    url='https://github.com/cprogrammer1994/miniglm',
+    author='Szabolcs Dombi',
+    author_email='cprogrammer1994@gmail.com',
+    license='MIT',
 )

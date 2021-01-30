@@ -199,6 +199,30 @@ PyObject * mymodule_meth_cast(PyObject * self, PyObject * arg) {
     return NULL;
 }
 
+PyObject * mymodule_meth_swizzle(PyObject * self, PyObject * args) {
+    Operand a;
+    const char * swizzle;
+    if (!PyArg_ParseTuple(args, "O&s", converter, &a, &swizzle)) {
+        return NULL;
+    }
+    if (a.type == VECTOR) {
+        return tup({
+            a.v[swizzle[0] - 'x'],
+            a.v[swizzle[1] - 'x'],
+            a.v[swizzle[2] - 'x'],
+        });
+    }
+    if (a.type == QUATERNION) {
+        return tup({
+            a.q[swizzle[0] - 'w'],
+            a.q[swizzle[1] - 'w'],
+            a.q[swizzle[2] - 'w'],
+            a.q[swizzle[3] - 'w'],
+        });
+    }
+    return NULL;
+}
+
 PyMethodDef module_methods[] = {
     {"add", (PyCFunction)mymodule_meth_add, METH_VARARGS, NULL},
     {"sub", (PyCFunction)mymodule_meth_sub, METH_VARARGS, NULL},
@@ -206,6 +230,7 @@ PyMethodDef module_methods[] = {
     {"normalize", (PyCFunction)mymodule_meth_normalize, METH_VARARGS, NULL},
     {"inverse", (PyCFunction)mymodule_meth_inverse, METH_VARARGS, NULL},
     {"cast", (PyCFunction)mymodule_meth_cast, METH_VARARGS, NULL},
+    {"swizzle", (PyCFunction)mymodule_meth_swizzle, METH_VARARGS, NULL},
     {},
 };
 

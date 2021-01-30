@@ -94,6 +94,30 @@ PyObject * tup(const glm::dmat3 & m) {
     return res;
 }
 
+PyObject * bytes(double s) {
+    float encoded[] = {(float)s};
+    return PyBytes_FromStringAndSize((char *)encoded, sizeof(encoded));
+}
+
+PyObject * bytes(const glm::dvec3 & v) {
+    float encoded[] = {(float)v.x, (float)v.y, (float)v.z};
+    return PyBytes_FromStringAndSize((char *)encoded, sizeof(encoded));
+}
+
+PyObject * bytes(const glm::dquat & q) {
+    float encoded[] = {(float)q.x, (float)q.y, (float)q.z, (float)q.w};
+    return PyBytes_FromStringAndSize((char *)encoded, sizeof(encoded));
+}
+
+PyObject * bytes(const glm::dmat3 & m) {
+    float encoded[] = {
+        (float)m[0].x, (float)m[0].y, (float)m[0].z,
+        (float)m[1].x, (float)m[1].y, (float)m[1].z,
+        (float)m[2].x, (float)m[2].y, (float)m[2].z,
+    };
+    return PyBytes_FromStringAndSize((char *)encoded, sizeof(encoded));
+}
+
 PyObject * mymodule_meth_add(PyObject * self, PyObject * args) {
     Operand a, b;
     if (!PyArg_ParseTuple(args, "O&O&", converter, &a, converter, &b)) {
@@ -223,6 +247,26 @@ PyObject * mymodule_meth_swizzle(PyObject * self, PyObject * args) {
     return NULL;
 }
 
+PyObject * mymodule_meth_pack(PyObject * self, PyObject * arg) {
+    Operand a;
+    if (!converter(arg, &a)) {
+        return NULL;
+    }
+    if (a.type == SCALAR) {
+        return bytes(a.s);
+    }
+    if (a.type == VECTOR) {
+        return bytes(a.v);
+    }
+    if (a.type == QUATERNION) {
+        return bytes(a.q);
+    }
+    if (a.type == MATRIX) {
+        return bytes(a.m);
+    }
+    return NULL;
+}
+
 PyMethodDef module_methods[] = {
     {"add", (PyCFunction)mymodule_meth_add, METH_VARARGS, NULL},
     {"sub", (PyCFunction)mymodule_meth_sub, METH_VARARGS, NULL},
@@ -231,6 +275,7 @@ PyMethodDef module_methods[] = {
     {"inverse", (PyCFunction)mymodule_meth_inverse, METH_O, NULL},
     {"cast", (PyCFunction)mymodule_meth_cast, METH_O, NULL},
     {"swizzle", (PyCFunction)mymodule_meth_swizzle, METH_VARARGS, NULL},
+    {"pack", (PyCFunction)mymodule_meth_pack, METH_O, NULL},
     {},
 };
 

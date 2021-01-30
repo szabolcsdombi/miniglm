@@ -227,9 +227,9 @@ PyMethodDef module_methods[] = {
     {"add", (PyCFunction)mymodule_meth_add, METH_VARARGS, NULL},
     {"sub", (PyCFunction)mymodule_meth_sub, METH_VARARGS, NULL},
     {"mul", (PyCFunction)mymodule_meth_mul, METH_VARARGS, NULL},
-    {"normalize", (PyCFunction)mymodule_meth_normalize, METH_VARARGS, NULL},
-    {"inverse", (PyCFunction)mymodule_meth_inverse, METH_VARARGS, NULL},
-    {"cast", (PyCFunction)mymodule_meth_cast, METH_VARARGS, NULL},
+    {"normalize", (PyCFunction)mymodule_meth_normalize, METH_O, NULL},
+    {"inverse", (PyCFunction)mymodule_meth_inverse, METH_O, NULL},
+    {"cast", (PyCFunction)mymodule_meth_cast, METH_O, NULL},
     {"swizzle", (PyCFunction)mymodule_meth_swizzle, METH_VARARGS, NULL},
     {},
 };

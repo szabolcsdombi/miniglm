@@ -2,12 +2,12 @@
 #include <glm/glm.hpp>
 
 PyObject * mymodule_meth_add(PyObject * self, PyObject * args) {
-    glm::vec3 a, b;
-    if (!PyArg_ParseTuple(args, "(fff)(fff)", &a.x, &a.y, &a.z, &b.x, &b.y, &b.z)) {
+    glm::dvec3 a, b;
+    if (!PyArg_ParseTuple(args, "(ddd)(ddd)", &a.x, &a.y, &a.z, &b.x, &b.y, &b.z)) {
         return NULL;
     }
-    glm::vec3 c = a + b;
-    return Py_BuildValue("fff", c.x, c.y, c.z);
+    glm::dvec3 c = a + b;
+    return Py_BuildValue("ddd", c.x, c.y, c.z);
 }
 
 PyMethodDef module_methods[] = {

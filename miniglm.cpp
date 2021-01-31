@@ -199,6 +199,15 @@ PyObject * meth_mix(PyObject * self, PyObject * args) {
     return NULL;
 }
 
+PyObject * meth_rotation(PyObject * self, PyObject * args) {
+    double s;
+    glm::dvec3 v;
+    if (!PyArg_ParseTuple(args, "d(ddd)", &s, &v.x, &v.y, &v.z)) {
+        return NULL;
+    }
+    return tup(glm::angleAxis(s, v));
+}
+
 PyObject * meth_normalize(PyObject * self, PyObject * arg) {
     Operand a;
     if (!converter(arg, &a)) {
@@ -293,6 +302,7 @@ PyMethodDef module_methods[] = {
     {"sub", (PyCFunction)meth_sub, METH_VARARGS, NULL},
     {"mul", (PyCFunction)meth_mul, METH_VARARGS, NULL},
     {"mix", (PyCFunction)meth_mix, METH_VARARGS, NULL},
+    {"rotation", (PyCFunction)meth_rotation, METH_VARARGS, NULL},
     {"normalize", (PyCFunction)meth_normalize, METH_O, NULL},
     {"inverse", (PyCFunction)meth_inverse, METH_O, NULL},
     {"cast", (PyCFunction)meth_cast, METH_O, NULL},

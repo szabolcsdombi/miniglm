@@ -31,6 +31,7 @@ int converter(PyObject * obj, Operand * operand) {
         return 1;
     }
     if (!PyTuple_CheckExact(obj)) {
+        PyErr_Format(PyExc_TypeError, "invalid operand");
         return 0;
     }
     if (PyTuple_Size(obj) == 3) {
@@ -61,6 +62,8 @@ int converter(PyObject * obj, Operand * operand) {
         operand->m[2].z = PyFloat_AsDouble(PyTuple_GET_ITEM(obj, 8));
         return 1;
     }
+    PyErr_Format(PyExc_TypeError, "invalid operand");
+    return 0;
 }
 
 PyObject * tup(const glm::dvec3 & v) {
@@ -129,6 +132,7 @@ PyObject * meth_add(PyObject * self, PyObject * args) {
     if (a.type == VECTOR && b.type == SCALAR) {
         return tup(a.v + b.s);
     }
+    PyErr_Format(PyExc_TypeError, "invalid operands");
     return NULL;
 }
 
@@ -143,6 +147,7 @@ PyObject * meth_sub(PyObject * self, PyObject * args) {
     if (a.type == VECTOR && b.type == SCALAR) {
         return tup(a.v - b.s);
     }
+    PyErr_Format(PyExc_TypeError, "invalid operands");
     return NULL;
 }
 
@@ -175,6 +180,7 @@ PyObject * meth_mul(PyObject * self, PyObject * args) {
     if (a.type == MATRIX && b.type == MATRIX) {
         return tup(a.m * b.m);
     }
+    PyErr_Format(PyExc_TypeError, "invalid operands");
     return NULL;
 }
 
@@ -196,6 +202,7 @@ PyObject * meth_mix(PyObject * self, PyObject * args) {
     if (a.type == MATRIX && b.type == MATRIX) {
         return tup(glm::dmat3(glm::slerp(glm::dquat(a.m), glm::dquat(b.m), s)));
     }
+    PyErr_Format(PyExc_TypeError, "invalid operands");
     return NULL;
 }
 
@@ -222,6 +229,7 @@ PyObject * meth_normalize(PyObject * self, PyObject * arg) {
     if (a.type == MATRIX) {
         return tup(glm::dmat3(glm::normalize(glm::dquat(a.m))));
     }
+    PyErr_Format(PyExc_TypeError, "invalid operand");
     return NULL;
 }
 
@@ -236,6 +244,7 @@ PyObject * meth_inverse(PyObject * self, PyObject * arg) {
     if (a.type == MATRIX) {
         return tup(glm::inverse(a.m));
     }
+    PyErr_Format(PyExc_TypeError, "invalid operand");
     return NULL;
 }
 
@@ -250,6 +259,7 @@ PyObject * meth_cast(PyObject * self, PyObject * arg) {
     if (a.type == MATRIX) {
         return tup(glm::dquat(a.m));
     }
+    PyErr_Format(PyExc_TypeError, "invalid operand");
     return NULL;
 }
 
@@ -274,6 +284,7 @@ PyObject * meth_swizzle(PyObject * self, PyObject * args) {
             a.q[(swizzle[2] - 'x') & 3],
         });
     }
+    PyErr_Format(PyExc_TypeError, "invalid operand");
     return NULL;
 }
 
@@ -294,6 +305,7 @@ PyObject * meth_pack(PyObject * self, PyObject * arg) {
     if (a.type == MATRIX) {
         return bytes(a.m);
     }
+    PyErr_Format(PyExc_TypeError, "invalid operand");
     return NULL;
 }
 

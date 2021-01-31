@@ -323,9 +323,12 @@ PyMethodDef module_methods[] = {
     {},
 };
 
-PyModuleDef module_def = {PyModuleDef_HEAD_INIT, "miniglm", NULL, -1, module_methods};
+PyModuleDef_Slot module_slots[] = {
+    {},
+};
+
+PyModuleDef module_def = {PyModuleDef_HEAD_INIT, "miniglm", NULL, 0, module_methods, module_slots};
 
 extern "C" PyObject * PyInit_miniglm() {
-    PyObject * module = PyModule_Create(&module_def);
-    return module;
+    return PyModuleDef_Init(&module_def);
 }

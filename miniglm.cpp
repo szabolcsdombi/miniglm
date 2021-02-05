@@ -39,6 +39,9 @@ int converter(PyObject * obj, Operand * operand) {
         operand->v.x = PyFloat_AsDouble(PyTuple_GET_ITEM(obj, 0));
         operand->v.y = PyFloat_AsDouble(PyTuple_GET_ITEM(obj, 1));
         operand->v.z = PyFloat_AsDouble(PyTuple_GET_ITEM(obj, 2));
+        if (PyErr_Occurred()) {
+            return NULL;
+        }
         return 1;
     }
     if (PyTuple_Size(obj) == 4) {
@@ -47,6 +50,9 @@ int converter(PyObject * obj, Operand * operand) {
         operand->q.y = PyFloat_AsDouble(PyTuple_GET_ITEM(obj, 1));
         operand->q.z = PyFloat_AsDouble(PyTuple_GET_ITEM(obj, 2));
         operand->q.w = PyFloat_AsDouble(PyTuple_GET_ITEM(obj, 3));
+        if (PyErr_Occurred()) {
+            return NULL;
+        }
         return 1;
     }
     if (PyTuple_Size(obj) == 9) {
@@ -60,6 +66,9 @@ int converter(PyObject * obj, Operand * operand) {
         operand->m[2].x = PyFloat_AsDouble(PyTuple_GET_ITEM(obj, 6));
         operand->m[2].y = PyFloat_AsDouble(PyTuple_GET_ITEM(obj, 7));
         operand->m[2].z = PyFloat_AsDouble(PyTuple_GET_ITEM(obj, 8));
+        if (PyErr_Occurred()) {
+            return NULL;
+        }
         return 1;
     }
     PyErr_Format(PyExc_TypeError, "invalid operand");

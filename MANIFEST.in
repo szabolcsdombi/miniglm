@@ -1,0 +1,3 @@
+recursive-include include *.inl *.hpp *.h
+include README.md
+include LICENSE

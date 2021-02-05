@@ -335,7 +335,6 @@ PyMethodDef module_methods[] = {
 int module_exec(PyObject * self) {
     PyObject * pi = PyFloat_FromDouble(glm::pi<double>());
     PyModule_AddObject(self, "pi", pi);
-    Py_DECREF(pi);
     return 0;
 }
 

@@ -69,49 +69,49 @@ def test_mix_scalar():
     np.testing.assert_almost_equal(res, 2.0)
 
 
-def test_rotation():
-    res = miniglm.rotation(miniglm.pi / 3.0, miniglm.normalize((0.48, 0.60, 0.64)))
+def test_rotate():
+    res = miniglm.rotate(miniglm.pi / 3.0, miniglm.norm((0.48, 0.60, 0.64)))
     expected = (0.24, 0.3, 0.32, 0.8660254037844387)
     np.testing.assert_almost_equal(res, expected)
     assert type(res) is tuple
 
 
-def test_rotation_x_90_deg():
-    res = miniglm.rotation(miniglm.pi / 2.0, (1.0, 0.0, 0.0))
+def test_rotate_x_90_deg():
+    res = miniglm.rotate(miniglm.pi / 2.0, (1.0, 0.0, 0.0))
     np.testing.assert_almost_equal(res, (np.sqrt(2.0) / 2.0, 0.0, 0.0, np.sqrt(2.0) / 2.0))
 
 
-def test_rotation_y_90_deg():
-    res = miniglm.rotation(miniglm.pi / 2.0, (0.0, 1.0, 0.0))
+def test_rotate_y_90_deg():
+    res = miniglm.rotate(miniglm.pi / 2.0, (0.0, 1.0, 0.0))
     np.testing.assert_almost_equal(res, (0.0, np.sqrt(2.0) / 2.0, 0.0, np.sqrt(2.0) / 2.0))
 
 
-def test_rotation_z_90_deg():
-    res = miniglm.rotation(miniglm.pi / 2.0, (0.0, 0.0, 1.0))
+def test_rotate_z_90_deg():
+    res = miniglm.rotate(miniglm.pi / 2.0, (0.0, 0.0, 1.0))
     np.testing.assert_almost_equal(res, (0.0, 0.0, np.sqrt(2.0) / 2.0, np.sqrt(2.0) / 2.0))
 
 
-def test_normalize_vec():
-    res = miniglm.normalize((48.0, 60.0, 64.0))
+def test_norm_vec():
+    res = miniglm.norm((48.0, 60.0, 64.0))
     expected = (0.48, 0.60, 0.64)
     np.testing.assert_almost_equal(res, expected)
     assert type(res) is tuple
 
 
-def test_normalize_quat():
-    res = miniglm.normalize((2.0, 4.0, 8.0, 4.0))
+def test_norm_quat():
+    res = miniglm.norm((2.0, 4.0, 8.0, 4.0))
     expected = (0.2, 0.4, 0.8, 0.4)
     np.testing.assert_almost_equal(res, expected)
     assert type(res) is tuple
 
 
-def test_normalize_mat():
+def test_norm_mat():
     mat = (
         0.074, 0.962, -0.259,
         -0.518, 0.259, 0.814,
         0.851, 0.074, 0.518,
     )
-    res = miniglm.normalize(mat)
+    res = miniglm.norm(mat)
     np.testing.assert_almost_equal(miniglm.det(res), 1.0)
     np.testing.assert_almost_equal(miniglm.cross(res[0:3], res[3:6]), res[6:9])
     np.testing.assert_almost_equal(miniglm.dot(res[0:3], res[3:6]), 0.0)

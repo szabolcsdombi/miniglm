@@ -30,6 +30,14 @@ mul(a, b)
     MATRIX QUATERNION -> matrix rotates a quaternion resulting in a quaternion
     MATRIX MATRIX -> matrix rotates a matrix resulting in a matrix
 
+cross(a, b)
+    VECTOR VECTOR -> vector cross product
+    QUATERNION QUATERNION -> quaternion cross product
+
+dot(a, b)
+    VECTOR VECTOR -> vector dot product
+    QUATERNION QUATERNION -> quaternion dot product
+
 mix(a, b, s)
     SCALAR SCALAR -> simple mix of scalars
     VECTOR VECTOR -> simple mix of vectors
@@ -44,6 +52,9 @@ normalize(a)
 inverse(a)
     QUATERNION -> inverse quaternion
     MATRIX -> inverse matrix
+
+det(a)
+    MATRIX -> matrix determinant
 
 cast(a)
     QUATERNION -> converts the quaternion to a matrix

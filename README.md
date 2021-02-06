@@ -47,12 +47,12 @@ dot(a, b)
 rotate(angle, axis)
     SCALAR VECOTR -> rotation by angle radians along the axis resulting in a quaternion
 
-normalize(a)
+norm(a)
     VECTOR -> vector normalize
     QUATERNION -> quaternion normalize
     MATRIX -> normalized quaternion derived from the matrix converted back to a matrix
 
-inverse(a)
+inv(a)
     QUATERNION -> inverse quaternion
     MATRIX -> inverse matrix
 

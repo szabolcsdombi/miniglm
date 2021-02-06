@@ -47,6 +47,10 @@ dot(a, b)
 rotate(angle, axis)
     SCALAR VECTOR -> rotation by angle radians along the axis resulting in a quaternion
 
+split(a)
+    QUATERNION -> angle and axis suitable for rotate
+    MATRIX -> matrix columns
+
 norm(a)
     VECTOR -> vector normalize
     QUATERNION -> quaternion normalize

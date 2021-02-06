@@ -254,6 +254,28 @@ PyObject * meth_rotate(PyObject * self, PyObject * args) {
     return tup(glm::angleAxis(s, v));
 }
 
+PyObject * meth_split(PyObject * self, PyObject * arg) {
+    Operand a;
+    if (!converter(arg, &a)) {
+        return NULL;
+    }
+    if (a.type == QUATERNION) {
+        PyObject * res = PyTuple_New(2);
+        PyTuple_SET_ITEM(res, 0, PyFloat_FromDouble(glm::angle(a.q)));
+        PyTuple_SET_ITEM(res, 1, tup(glm::axis(a.q)));
+        return res;
+    }
+    if (a.type == MATRIX) {
+        PyObject * res = PyTuple_New(3);
+        PyTuple_SET_ITEM(res, 0, tup(a.m[0]));
+        PyTuple_SET_ITEM(res, 1, tup(a.m[1]));
+        PyTuple_SET_ITEM(res, 2, tup(a.m[2]));
+        return res;
+    }
+    PyErr_Format(PyExc_TypeError, "invalid operand");
+    return NULL;
+}
+
 PyObject * meth_norm(PyObject * self, PyObject * arg) {
     Operand a;
     if (!converter(arg, &a)) {
@@ -368,6 +390,7 @@ PyMethodDef module_methods[] = {
     {"cross", (PyCFunction)meth_cross, METH_VARARGS, NULL},
     {"dot", (PyCFunction)meth_dot, METH_VARARGS, NULL},
     {"rotate", (PyCFunction)meth_rotate, METH_VARARGS, NULL},
+    {"split", (PyCFunction)meth_split, METH_O, NULL},
     {"norm", (PyCFunction)meth_norm, METH_O, NULL},
     {"inv", (PyCFunction)meth_inv, METH_O, NULL},
     {"det", (PyCFunction)meth_det, METH_O, NULL},

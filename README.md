@@ -45,7 +45,7 @@ dot(a, b)
     QUATERNION QUATERNION -> quaternion dot product
 
 rotate(angle, axis)
-    SCALAR VECOTR -> rotation by angle radians along the axis resulting in a quaternion
+    SCALAR VECTOR -> rotation by angle radians along the axis resulting in a quaternion
 
 norm(a)
     VECTOR -> vector normalize

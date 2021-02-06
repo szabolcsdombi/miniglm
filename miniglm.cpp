@@ -287,6 +287,18 @@ PyObject * meth_inverse(PyObject * self, PyObject * arg) {
     return NULL;
 }
 
+PyObject * meth_det(PyObject * self, PyObject * arg) {
+    Operand a;
+    if (!converter(arg, &a)) {
+        return NULL;
+    }
+    if (a.type == MATRIX) {
+        return PyFloat_FromDouble(glm::determinant(a.m));
+    }
+    PyErr_Format(PyExc_TypeError, "invalid operand");
+    return NULL;
+}
+
 PyObject * meth_cast(PyObject * self, PyObject * arg) {
     Operand a;
     if (!converter(arg, &a)) {
@@ -358,6 +370,7 @@ PyMethodDef module_methods[] = {
     {"rotation", (PyCFunction)meth_rotation, METH_VARARGS, NULL},
     {"normalize", (PyCFunction)meth_normalize, METH_O, NULL},
     {"inverse", (PyCFunction)meth_inverse, METH_O, NULL},
+    {"det", (PyCFunction)meth_det, METH_O, NULL},
     {"cast", (PyCFunction)meth_cast, METH_O, NULL},
     {"swizzle", (PyCFunction)meth_swizzle, METH_VARARGS, NULL},
     {"pack", (PyCFunction)meth_pack, METH_O, NULL},

@@ -245,7 +245,7 @@ PyObject * meth_dot(PyObject * self, PyObject * args) {
     return NULL;
 }
 
-PyObject * meth_rotation(PyObject * self, PyObject * args) {
+PyObject * meth_rotate(PyObject * self, PyObject * args) {
     double s;
     glm::dvec3 v;
     if (!PyArg_ParseTuple(args, "d(ddd)", &s, &v.x, &v.y, &v.z)) {
@@ -367,7 +367,7 @@ PyMethodDef module_methods[] = {
     {"mix", (PyCFunction)meth_mix, METH_VARARGS, NULL},
     {"cross", (PyCFunction)meth_cross, METH_VARARGS, NULL},
     {"dot", (PyCFunction)meth_dot, METH_VARARGS, NULL},
-    {"rotation", (PyCFunction)meth_rotation, METH_VARARGS, NULL},
+    {"rotate", (PyCFunction)meth_rotate, METH_VARARGS, NULL},
     {"normalize", (PyCFunction)meth_normalize, METH_O, NULL},
     {"inverse", (PyCFunction)meth_inverse, METH_O, NULL},
     {"det", (PyCFunction)meth_det, METH_O, NULL},

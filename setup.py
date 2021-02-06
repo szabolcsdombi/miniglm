@@ -14,7 +14,7 @@ with open('README.md') as readme:
 
 setup(
     name='miniglm',
-    version='0.3.1',
+    version='0.3.2',
     ext_modules=[ext],
     long_description=long_description,
     long_description_content_type='text/markdown',

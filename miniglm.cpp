@@ -215,6 +215,36 @@ PyObject * meth_mix(PyObject * self, PyObject * args) {
     return NULL;
 }
 
+PyObject * meth_cross(PyObject * self, PyObject * args) {
+    Operand a, b;
+    if (!PyArg_ParseTuple(args, "O&O&", converter, &a, converter, &b)) {
+        return NULL;
+    }
+    if (a.type == VECTOR && b.type == VECTOR) {
+        return tup(glm::cross(a.v, b.v));
+    }
+    if (a.type == QUATERNION && b.type == QUATERNION) {
+        return tup(glm::cross(a.q, b.q));
+    }
+    PyErr_Format(PyExc_TypeError, "invalid operands");
+    return NULL;
+}
+
+PyObject * meth_dot(PyObject * self, PyObject * args) {
+    Operand a, b;
+    if (!PyArg_ParseTuple(args, "O&O&", converter, &a, converter, &b)) {
+        return NULL;
+    }
+    if (a.type == VECTOR && b.type == VECTOR) {
+        return PyFloat_FromDouble(glm::dot(a.v, b.v));
+    }
+    if (a.type == QUATERNION && b.type == QUATERNION) {
+        return PyFloat_FromDouble(glm::dot(a.q, b.q));
+    }
+    PyErr_Format(PyExc_TypeError, "invalid operands");
+    return NULL;
+}
+
 PyObject * meth_rotation(PyObject * self, PyObject * args) {
     double s;
     glm::dvec3 v;
@@ -323,6 +353,8 @@ PyMethodDef module_methods[] = {
     {"sub", (PyCFunction)meth_sub, METH_VARARGS, NULL},
     {"mul", (PyCFunction)meth_mul, METH_VARARGS, NULL},
     {"mix", (PyCFunction)meth_mix, METH_VARARGS, NULL},
+    {"cross", (PyCFunction)meth_cross, METH_VARARGS, NULL},
+    {"dot", (PyCFunction)meth_dot, METH_VARARGS, NULL},
     {"rotation", (PyCFunction)meth_rotation, METH_VARARGS, NULL},
     {"normalize", (PyCFunction)meth_normalize, METH_O, NULL},
     {"inverse", (PyCFunction)meth_inverse, METH_O, NULL},

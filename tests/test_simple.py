@@ -42,15 +42,36 @@ def test_mul_vec_scalar():
     assert type(res) is tuple
 
 
-def test_mix_vec_vec():
+def test_cross():
+    res = miniglm.cross((2.0, 3.5, 7.1), (0.2, 10.0, 3.3))
+    np.testing.assert_almost_equal(res, (-59.45, -5.18, 19.3))
+    assert type(res) is tuple
+
+
+def test_dot_vec():
+    res = miniglm.dot((2.0, 3.5, 7.1), (0.2, 10.0, 3.3))
+    np.testing.assert_almost_equal(res, 58.83)
+
+
+def test_dot_quat():
+    res = miniglm.dot((2.0, 3.5, 7.1), (0.2, 10.0, 3.3))
+    np.testing.assert_almost_equal(res, 58.83)
+
+
+def test_mix_vec():
     res = miniglm.mix((2.5, 3.4, 4.6), (7.2, 1.1, 3.2), 0.2)
     np.testing.assert_almost_equal(res, (3.44, 2.94, 4.32))
     assert type(res) is tuple
 
 
+def test_mix_scalar():
+    res = miniglm.mix(1.0, 3.0, 0.5)
+    np.testing.assert_almost_equal(res, 2.0)
+
+
 def test_rotation():
-    res = miniglm.rotation(0.75, miniglm.normalize((1.0, 2.0, 3.0)))
-    expected = (0.09789045100194166, 0.19578090200388332, 0.293671353005825, 0.9305076219123143)
+    res = miniglm.rotation(miniglm.pi / 3.0, miniglm.normalize((0.48, 0.60, 0.64)))
+    expected = (0.24, 0.3, 0.32, 0.8660254037844387)
     np.testing.assert_almost_equal(res, expected)
     assert type(res) is tuple
 
@@ -71,26 +92,37 @@ def test_rotation_z_90_deg():
 
 
 def test_normalize_vec():
-    res = miniglm.normalize((2.0, 3.0, 4.0))
-    expected = (0.3713906763541037, 0.5570860145311556, 0.7427813527082074)
+    res = miniglm.normalize((48.0, 60.0, 64.0))
+    expected = (0.48, 0.60, 0.64)
     np.testing.assert_almost_equal(res, expected)
     assert type(res) is tuple
 
 
 def test_normalize_quat():
-    res = miniglm.normalize((2.0, 3.0, 4.0, 5.0))
-    expected = (0.2721655269759087, 0.408248290463863, 0.5443310539518174, 0.6804138174397717)
+    res = miniglm.normalize((2.0, 4.0, 8.0, 4.0))
+    expected = (0.2, 0.4, 0.8, 0.4)
     np.testing.assert_almost_equal(res, expected)
     assert type(res) is tuple
 
 
-def test_cast():
-    quat = (0.2721655269759087, 0.408248290463863, 0.5443310539518174, 0.6804138174397717)
+def test_normalize_mat():
     mat = (
-        0.07407407407407418, 0.9629629629629629, -0.2592592592592593,
-        -0.5185185185185185, 0.2592592592592593, 0.8148148148148148,
-        0.8518518518518519, 0.07407407407407407, 0.5185185185185186,
+        0.074, 0.962, -0.259,
+        -0.518, 0.259, 0.814,
+        0.851, 0.074, 0.518,
     )
+    res = miniglm.normalize(mat)
+    np.testing.assert_almost_equal(miniglm.det(res), 1.0)
+    np.testing.assert_almost_equal(miniglm.cross(res[0:3], res[3:6]), res[6:9])
+    np.testing.assert_almost_equal(miniglm.dot(res[0:3], res[3:6]), 0.0)
+    np.testing.assert_almost_equal(miniglm.dot(res[3:6], res[6:9]), 0.0)
+    np.testing.assert_almost_equal(miniglm.dot(res[0:3], res[6:9]), 0.0)
+    assert type(res) is tuple
+
+
+def test_cast():
+    quat = (0.2, 0.4, 0.8, 0.4)
+    mat = (-0.6, 0.8, 0.0, -0.48, -0.36, 0.8, 0.64, 0.48, 0.6)
     np.testing.assert_almost_equal(miniglm.cast(quat), mat)
     np.testing.assert_almost_equal(miniglm.cast(mat), quat)
     np.testing.assert_almost_equal(miniglm.cast(miniglm.cast(quat)), quat)
@@ -103,8 +135,8 @@ def test_swizzle_vec():
 
 
 def test_swizzle_quat():
-    res = miniglm.swizzle((0.272, 0.408, 0.544, 0.680), 'wxyz')
-    np.testing.assert_almost_equal(res, (0.680, 0.272, 0.408, 0.544))
+    res = miniglm.swizzle((0.1, 0.7, 0.5, 0.5), 'wxyz')
+    np.testing.assert_almost_equal(res, (0.5, 0.1, 0.7, 0.5))
 
 
 def test_pack_scalar():
@@ -117,7 +149,7 @@ def test_pack_vec():
 
 
 def test_pack_quat():
-    quat = (0.272, 0.408, 0.544, 0.680)
+    quat = (0.1, 0.7, 0.5, 0.5)
     assert miniglm.pack(quat) == struct.pack('ffff', *quat)
 
 

@@ -30,6 +30,12 @@ mul(a, b)
     MATRIX QUATERNION -> matrix rotates a quaternion resulting in a quaternion
     MATRIX MATRIX -> matrix rotates a matrix resulting in a matrix
 
+mix(a, b, s)
+    SCALAR SCALAR -> simple mix of scalars
+    VECTOR VECTOR -> simple mix of vectors
+    QUATERNION QUATERNION -> quaternion rotation spherical interpolation (slerp)
+    MATRIX MATRIX -> matrix rotation spherical interpolation (slerp)
+
 cross(a, b)
     VECTOR VECTOR -> vector cross product
     QUATERNION QUATERNION -> quaternion cross product
@@ -38,11 +44,8 @@ dot(a, b)
     VECTOR VECTOR -> vector dot product
     QUATERNION QUATERNION -> quaternion dot product
 
-mix(a, b, s)
-    SCALAR SCALAR -> simple mix of scalars
-    VECTOR VECTOR -> simple mix of vectors
-    QUATERNION QUATERNION -> quaternion rotation spherical interpolation (slerp)
-    MATRIX MATRIX -> matrix rotation spherical interpolation (slerp)
+rotate(angle, axis)
+    SCALAR VECOTR -> rotation by angle radians along the axis resulting in a quaternion
 
 normalize(a)
     VECTOR -> vector normalize

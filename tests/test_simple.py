@@ -76,6 +76,14 @@ def test_rotate():
     assert type(res) is tuple
 
 
+def test_split_quat():
+    quat = (0.24, 0.3, 0.32, 0.8660254037844387)
+    angle, axis = miniglm.split(quat)
+    np.testing.assert_almost_equal(angle, miniglm.pi / 3.0)
+    np.testing.assert_almost_equal(axis, (0.48, 0.60, 0.64))
+    assert type(axis) is tuple
+
+
 def test_rotate_x_90_deg():
     res = miniglm.rotate(miniglm.pi / 2.0, (1.0, 0.0, 0.0))
     np.testing.assert_almost_equal(res, (np.sqrt(2.0) / 2.0, 0.0, 0.0, np.sqrt(2.0) / 2.0))

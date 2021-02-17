@@ -56,6 +56,10 @@ norm(a)
     QUATERNION -> quaternion normalize
     MATRIX -> normalized quaternion derived from the matrix converted back to a matrix
 
+length(a)
+    VECTOR -> vector length
+    QUATERNION -> quaternion length
+
 inv(a)
     QUATERNION -> inverse quaternion
     MATRIX -> inverse matrix

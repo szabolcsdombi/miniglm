@@ -294,6 +294,21 @@ PyObject * meth_norm(PyObject * self, PyObject * arg) {
     return NULL;
 }
 
+PyObject * meth_length(PyObject * self, PyObject * arg) {
+    Operand a;
+    if (!converter(arg, &a)) {
+        return NULL;
+    }
+    if (a.type == VECTOR) {
+        return PyFloat_FromDouble(glm::length(a.v));
+    }
+    if (a.type == QUATERNION) {
+        return PyFloat_FromDouble(glm::length(a.q));
+    }
+    PyErr_Format(PyExc_TypeError, "invalid operand");
+    return NULL;
+}
+
 PyObject * meth_inv(PyObject * self, PyObject * arg) {
     Operand a;
     if (!converter(arg, &a)) {
@@ -392,6 +407,7 @@ PyMethodDef module_methods[] = {
     {"rotate", (PyCFunction)meth_rotate, METH_VARARGS, NULL},
     {"split", (PyCFunction)meth_split, METH_O, NULL},
     {"norm", (PyCFunction)meth_norm, METH_O, NULL},
+    {"length", (PyCFunction)meth_length, METH_O, NULL},
     {"inv", (PyCFunction)meth_inv, METH_O, NULL},
     {"det", (PyCFunction)meth_det, METH_O, NULL},
     {"cast", (PyCFunction)meth_cast, METH_O, NULL},

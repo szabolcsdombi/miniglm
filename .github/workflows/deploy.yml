@@ -13,7 +13,7 @@ jobs:
       - name: sdist
         run: docker run --rm -v `pwd`:/build -w /build python:3.8-slim python3 setup.py sdist
 
-      - name: Publish a Python distribution to PyPI
+      - name: publish
         uses: pypa/gh-action-pypi-publish@master
         with:
           user: __token__
